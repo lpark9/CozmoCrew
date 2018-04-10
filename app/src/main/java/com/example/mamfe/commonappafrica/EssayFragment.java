@@ -35,7 +35,7 @@ public class EssayFragment extends Fragment {
     @OnClick(R.id.save)
     void onClick() {
         CustomDialog dialog2 = new CustomDialog(getContext());
-        dialog2.setText("Your progress had been submitted!");
+        dialog2.setText("Your progress had been saved!");
         dialog2.show();
         AppCompatActivity activity = (AppCompatActivity) getContext();
         Fragment myFragment = new CollegeFragment();
