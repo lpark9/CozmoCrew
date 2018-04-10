@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new SearchFragment()).commit();
     }
 
     @Override
@@ -75,9 +76,10 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_app) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new ApplicationFragment()).commit();
-        } else if (id == R.id.nav_college) {
+//        if (id == R.id.nav_app) {
+//            getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new ApplicationFragment()).commit();
+//        } else
+        if (id == R.id.nav_college) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new CollegeFragment()).commit();
         } else if (id == R.id.nav_logout) {
             finish();

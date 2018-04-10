@@ -42,6 +42,7 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
     private final Context context;
     private ArrayList<String> mOriginalValues;
     private ArrayList<String> mDisplayedValues;
+    private int check;
 
     public SearchRecyclerAdapter(Context context, int check) {
         this.context = context;
@@ -49,6 +50,7 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
         this.mDisplayedValues = new ArrayList<>();
         if (Model.collegeList.size() == 0)
         Model.populateStockList(context);
+        this.check = check;
         if (check == 1) mOriginalValues = Model.myColleges;
         else mOriginalValues = Model.collegeList;
         createDisplayedValue(mOriginalValues);
@@ -60,6 +62,8 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
         View itemView;
         itemView =
                 LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item_search, parent, false);
+        if (check == 1)
+            itemView =  LayoutInflater.from(parent.getContext()).inflate(R.layout.item_college, parent, false);
         return new ViewHolder(itemView);
     }
 
