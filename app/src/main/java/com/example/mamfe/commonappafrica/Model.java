@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by Myo Thiha on 4/5/2018.
@@ -18,7 +19,7 @@ public class Model {
     public static String HSname;
     public static String GPA = "4.0";
     public static String selected = new String();
-    public static ArrayList<String> myColleges = new ArrayList<>();
+    public static ArrayList<String> myColleges = new ArrayList<>(Arrays.asList("University of Buea"));
     public static ArrayList<String> collegeList = new ArrayList<>();
     public static void populateStockList(Context context) {
         String json = loadJSONFromAsset(context);
