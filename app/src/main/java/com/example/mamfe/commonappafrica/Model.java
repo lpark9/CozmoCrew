@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class Model {
     public static String HSname;
-    public static String GPA;
+    public static String GPA = "3.6";
     public static String selected = new String();
     public static ArrayList<String> myColleges = new ArrayList<>();
     public static ArrayList<String> collegeList = new ArrayList<>();

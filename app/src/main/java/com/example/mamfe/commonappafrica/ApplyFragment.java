@@ -32,7 +32,10 @@ public class ApplyFragment extends Fragment {
         return view;
     }
     @OnClick (R.id.add) void onClick() {
-        Toast.makeText(getContext(), Model.selected + " had been added", Toast.LENGTH_SHORT).show();
+        CustomDialog dialog = new CustomDialog(getContext());
+        dialog.show();
+        dialog.setText(Model.selected + " had been added to your 'My Colleges' list");
+        //Toast.makeText(getContext(), , Toast.LENGTH_SHORT).show();
         Model.myColleges.add(Model.selected);
     }
     @OnClick (R.id.apply) void onClick2() {
