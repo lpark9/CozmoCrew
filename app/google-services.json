@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1016049805736",
+    "firebase_url": "https://cozmocrew-fee6f.firebaseio.com",
+    "project_id": "cozmocrew-fee6f",
+    "storage_bucket": "cozmocrew-fee6f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1016049805736:android:affa535522319efc",
+        "android_client_info": {
+          "package_name": "com.example.mamfe.commonappafrica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1016049805736-8kn0h82koj32kfb3ffegcodu852lpqc6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mamfe.commonappafrica",
+            "certificate_hash": "2f6afa998716333f8c851c906f68d672bfcbccf1"
+          }
+        },
+        {
+          "client_id": "1016049805736-2lp313r40kuu5h1is8jgtd4gfnctsrvv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMSJPDmKneqKoU86-OJSa3EGPu6i99LgY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1016049805736-2lp313r40kuu5h1is8jgtd4gfnctsrvv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -21,6 +21,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Button email = (Button) findViewById(R.id.login_button);
+        Button register = (Button) findViewById(R.id.register_button);
         email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +49,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         //Button register = (Button) findViewById(R.id.register_button);
-
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+            }
+        });
         ButterKnife.bind(this);
     }
 //    @OnClick(R.id.login_button) public void onClick() {
