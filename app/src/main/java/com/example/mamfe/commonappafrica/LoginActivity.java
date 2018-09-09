@@ -39,8 +39,8 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "User password is Empty", Toast.LENGTH_SHORT).show();
                 } else if (!userValue.matches(emailPattern)) {
                     Toast.makeText(getApplicationContext(), "not valid email address", Toast.LENGTH_SHORT).show();
-                } else if (passValue.length() <= 8) {
-                    Toast.makeText(getApplicationContext(), "Password length is too short", Toast.LENGTH_SHORT).show();
+                } else if (passValue.length() < 8) {
+                    Toast.makeText(getApplicationContext(), "Password length should be greater than 8", Toast.LENGTH_SHORT).show();
                 }
                 if (userValue.matches(emailPattern) && passValue.length() >= 8) {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
