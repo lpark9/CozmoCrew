@@ -85,7 +85,6 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new CollegeFragment()).commit();
         } else if (id == R.id.nav_logout) {
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-            finish();
         } else if (id == R.id.nav_profile) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new ProfileFragment()).commit();
         } else if (id == R.id.nav_search) {
