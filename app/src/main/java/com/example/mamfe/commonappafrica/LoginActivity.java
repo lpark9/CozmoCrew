@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                                     if (mPasswordView.getText().toString().length() < 6) {
                                         mPasswordView.setError("The password is too short");
                                     } else {
-                                        Toast.makeText(LoginActivity.this, "authroization failed", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(LoginActivity.this, "Invalid Credential", Toast.LENGTH_LONG).show();
                                     }
                                 } else {
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
