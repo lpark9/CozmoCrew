@@ -1,10 +1,13 @@
 package com.example.mamfe.commonappafrica;
 
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -154,11 +157,18 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
 
         @OnClick(R.id.searchRowItemContainer)
         void onClick() {
+            FragmentManager manager = ((Activity) context).getFragmentManager();
+
             int position = getAdapterPosition();
             Model.selected = mDisplayedValues.get(position);
             AppCompatActivity activity = (AppCompatActivity) context;
-            Fragment myFragment = new ApplyFragment();
-            activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, myFragment).addToBackStack(null).commit();
+
+            Fragment applyFragment = new ApplyFragment();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.frame_container, applyFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+
         }
 
     }

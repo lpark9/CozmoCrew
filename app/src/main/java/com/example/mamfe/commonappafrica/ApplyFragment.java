@@ -1,8 +1,9 @@
 package com.example.mamfe.commonappafrica;
 
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,10 +41,17 @@ public class ApplyFragment extends Fragment {
     }
     @OnClick (R.id.apply) void onClick2() {
         AppCompatActivity activity = (AppCompatActivity) getContext();
-        Fragment myFragment = new EssayFragment();
-        if (!Model.myColleges.contains(Model.selected))
-        Model.myColleges.add(Model.selected);
-        activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, myFragment).addToBackStack(null).commit();
+
+        if (!Model.myColleges.contains(Model.selected)) {
+            Model.myColleges.add(Model.selected);
+        }
+
+        Fragment essayFragment = new EssayFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container, essayFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+
     }
 
 }

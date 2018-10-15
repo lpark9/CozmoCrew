@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AcademicProfileHome"
+    tools:layout_editor_absoluteY="81dp">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <Button
+        android:id="@+id/buttonEduBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Education Background"
+        app:layout_constraintStart_toStartOf="@+id/buttonGenInfo"
+        app:layout_constraintTop_toBottomOf="@+id/buttonGenInfo" />
+
+    <Button
+        android:id="@+id/buttonAppDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Application Details"
+        app:layout_constraintStart_toStartOf="@+id/buttonEduBackground"
+        app:layout_constraintTop_toBottomOf="@+id/buttonEduBackground" />
+
+    <Button
+        android:id="@+id/buttonFamilyInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Family Information"
+        app:layout_constraintStart_toStartOf="@+id/buttonPersonalHealth"
+        app:layout_constraintTop_toBottomOf="@+id/buttonPersonalHealth" />
+
+    <Button
+        android:id="@+id/buttonPersonalHealth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Personal Health"
+        app:layout_constraintStart_toStartOf="@+id/buttonWorkExp"
+        app:layout_constraintTop_toBottomOf="@+id/buttonWorkExp" />
+
+    <Button
+        android:id="@+id/buttonWorkExp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Work Experience"
+        app:layout_constraintStart_toStartOf="@+id/buttonAppDetails"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAppDetails" />
+
+    <Button
+        android:id="@+id/buttonGenInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:text="General Info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>

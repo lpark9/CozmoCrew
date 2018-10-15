@@ -2,7 +2,8 @@ package com.example.mamfe.commonappafrica;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,15 +34,22 @@ public class ProfileFragment extends Fragment {
         return view;
     }
     @OnClick (R.id.editButton) void onClick(Button v) {
-        if (v.getText().toString().equals("Edit")) {
-            v.setText("Save");
-            editText.setEnabled(true);
-        } else {
-            v.setTag(0);
-            Model.GPA = editText.getText().toString();
-            v.setText("Edit");
-            editText.setEnabled(false);
-        }
+        Fragment academicHomeProfileFragment = new AcademicProfileHome();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.frame_container, academicHomeProfileFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+
+//        if (v.getText().toString().equals("Edit")) {
+//            v.setText("Save");
+//            editText.setEnabled(true);
+//        } else {
+//            v.setTag(0);
+//            Model.GPA = editText.getText().toString();
+//            v.setText("Edit");
+//            editText.setEnabled(false);
+//        }
     }
 
 }

@@ -1,10 +1,11 @@
 package com.example.mamfe.commonappafrica;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -36,18 +37,34 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new SearchFragment()).commit();
+
+
+        Fragment searchFragment = new SearchFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.frame_container, searchFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        if (drawer.isDrawerOpen(GravityCompat.START)) {
-//            drawer.closeDrawer(GravityCompat.START);
-//        } else {
-//            super.onBackPressed();
-//        }
+        //startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            int count = getFragmentManager().getBackStackEntryCount();
+
+            if (count == 0) {
+                super.onBackPressed();
+                //additional code
+            } else {
+                getFragmentManager().popBackStack(null, 0);
+
+            }
+        }
     }
 
     @Override
@@ -82,13 +99,29 @@ public class MainActivity extends AppCompatActivity
 //            getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new ApplicationFragment()).commit();
 //        } else
         if (id == R.id.nav_college) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new CollegeFragment()).commit();
+            Fragment collegeFragment = new CollegeFragment();
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+            transaction.replace(R.id.frame_container, collegeFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
         } else if (id == R.id.nav_logout) {
+            //This is kept as a seperate act
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         } else if (id == R.id.nav_profile) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new ProfileFragment()).commit();
+            ProfileFragment profileFragment = new ProfileFragment();
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+            transaction.replace(R.id.frame_container, profileFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
         } else if (id == R.id.nav_search) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new SearchFragment()).commit();
+            Fragment searchFragment = new SearchFragment();
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+            transaction.replace(R.id.frame_container, searchFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
         } else if (id == R.id.nav_settings) {
 
         }

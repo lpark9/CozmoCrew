@@ -1,10 +1,11 @@
 package com.example.mamfe.commonappafrica;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,8 +39,13 @@ public class EssayFragment extends Fragment {
         dialog2.setText("Your progress had been saved!");
         dialog2.show();
         AppCompatActivity activity = (AppCompatActivity) getContext();
-        Fragment myFragment = new CollegeFragment();
-        activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, myFragment).addToBackStack(null).commit();
+
+        Fragment collegeFragment = new CollegeFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.frame_container, collegeFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     @OnClick(R.id.submit)
@@ -52,11 +58,17 @@ public class EssayFragment extends Fragment {
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                 dialog.dismiss();
                 AppCompatActivity activity = (AppCompatActivity) getContext();
-                Fragment myFragment = new SearchFragment();
+
                 CustomDialog dialog2 = new CustomDialog(getContext());
                 dialog2.setText("Your application had been submitted!");
                 dialog2.show();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, myFragment).addToBackStack(null).commit();
+
+                Fragment searchFragment = new SearchFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_container, searchFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
             }
         }).negativeText("No").onNegative(new MaterialDialog.SingleButtonCallback() {
             @Override
