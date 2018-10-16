@@ -4,9 +4,20 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 /**
@@ -26,6 +37,10 @@ public class AcademicProfilePersonalHealth extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private FirebaseAuth mAuth;
+    private FirebaseUser user;
+    private DatabaseReference database;
 
     private OnFragmentInteractionListener mListener;
 
@@ -63,8 +78,89 @@ public class AcademicProfilePersonalHealth extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_academic_profile_personal_health, container, false);
+        View view = inflater.inflate(R.layout.fragment_academic_profile_personal_health, container, false);
+
+        this.mAuth = FirebaseAuth.getInstance();
+        this.user = mAuth.getCurrentUser();
+        this.database = FirebaseDatabase.getInstance().getReference();
+
+        //final String uid = user.getUid();
+
+        //Bind the save listener to button
+        Button saveButton = view.findViewById(R.id.saveButton);
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Update firebase
+                updateFirebaseFields();
+            }
+        });
+
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        populateFields(getView());
+    }
+
+    private void updateFirebaseFields() {
+        String uid = this.user.getUid();
+        DatabaseReference appDetails = database.child("UserProfiles").child(uid).child("personalHealth");
+
+        appDetails.child("doYouUseDrugs").setValue(((EditText) getView().findViewById(R.id.doYouUseDrugsEdit)).getText().toString());
+        appDetails.child("haveYouUsedDrugs").setValue(((EditText) getView().findViewById(R.id.haveYouEverUsedEdit)).getText().toString());
+        appDetails.child("doYouDrink").setValue(((EditText) getView().findViewById(R.id.doYouDrinkEdit)).getText().toString());
+        appDetails.child("haveYouDrank").setValue(((EditText) getView().findViewById(R.id.haveYouEverDrankEdit)).getText().toString());
+        appDetails.child("doYouSmoke").setValue(((EditText) getView().findViewById(R.id.doYouSmokeEdit)).getText().toString());
+        appDetails.child("haveYouSmoked").setValue(((EditText) getView().findViewById(R.id.haveYouEverSmokedEdit)).getText().toString());
+    }
+
+    private void populateFields(final View view) {
+        //TODO: Populate the fields
+        String uid = this.user.getUid();
+        database.child("UserProfiles").child(uid).child("personalHealth").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child("doYouUseDrugs").getValue() != null) {
+                    EditText t = view.findViewById(R.id.doYouUseDrugsEdit);
+                    t.setText((String) dataSnapshot.child("doYouUseDrugs").getValue());
+                }
+
+                if(dataSnapshot.child("haveYouUsedDrugs").getValue() != null) {
+                    EditText t = view.findViewById(R.id.haveYouEverUsedEdit);
+                    t.setText((String) dataSnapshot.child("haveYouUsedDrugs").getValue());
+                }
+
+                if(dataSnapshot.child("doYouDrink").getValue() != null) {
+                    EditText t = view.findViewById(R.id.doYouDrinkEdit);
+                    t.setText((String) dataSnapshot.child("doYouDrink").getValue());
+                }
+
+                if(dataSnapshot.child("haveYouDrank").getValue() != null) {
+                    EditText t = view.findViewById(R.id.haveYouEverDrankEdit);
+                    t.setText((String) dataSnapshot.child("haveYouDrank").getValue());
+                }
+
+                if(dataSnapshot.child("doYouSmoke").getValue() != null) {
+                    EditText t = view.findViewById(R.id.doYouSmokeEdit);
+                    t.setText((String) dataSnapshot.child("doYouSmoke").getValue());
+                }
+
+                if(dataSnapshot.child("haveYouSmoked").getValue() != null) {
+                    EditText t = view.findViewById(R.id.haveYouEverSmokedEdit);
+                    t.setText((String) dataSnapshot.child("haveYouSmoked").getValue());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                //TODO: Doing nothing right now
+            }
+        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event

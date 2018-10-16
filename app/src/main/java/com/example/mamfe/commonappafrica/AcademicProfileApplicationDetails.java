@@ -1,12 +1,24 @@
 package com.example.mamfe.commonappafrica;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 /**
@@ -27,44 +39,95 @@ public class AcademicProfileApplicationDetails extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private FirebaseAuth mAuth;
+    private FirebaseUser user;
+    private DatabaseReference database;
+
     private OnFragmentInteractionListener mListener;
 
     public AcademicProfileApplicationDetails() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AcademicProfileApplicationDetails.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AcademicProfileApplicationDetails newInstance(String param1, String param2) {
-        AcademicProfileApplicationDetails fragment = new AcademicProfileApplicationDetails();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_academic_profile_application_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_academic_profile_application_details, container, false);
+
+        this.mAuth = FirebaseAuth.getInstance();
+        this.user = mAuth.getCurrentUser();
+        this.database = FirebaseDatabase.getInstance().getReference();
+
+        //final String uid = user.getUid();
+
+        //Bind the save listener to button
+        Button saveButton = view.findViewById(R.id.saveButton);
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Update firebase
+                updateFirebaseFields();
+            }
+        });
+
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        populateFields(getView());
+    }
+
+    private void updateFirebaseFields() {
+        String uid = this.user.getUid();
+        DatabaseReference appDetails = database.child("UserProfiles").child(uid).child("applicationDetails");
+
+        appDetails.child("degreeDesired").setValue(((EditText) getView().findViewById(R.id.degreeEdit)).getText().toString());
+        appDetails.child("fieldOfStudy").setValue(((EditText) getView().findViewById(R.id.fieldOfStudyEdit)).getText().toString());
+        appDetails.child("semester").setValue(((EditText) getView().findViewById(R.id.semesterEdit)).getText().toString());
+        appDetails.child("year").setValue(((EditText) getView().findViewById(R.id.yearEdit)).getText().toString());
+    }
+
+    private void populateFields(final View view) {
+        //TODO: Populate the fields
+        String uid = this.user.getUid();
+        database.child("UserProfiles").child(uid).child("applicationDetails").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child("degreeDesired").getValue() != null) {
+                    EditText t = view.findViewById(R.id.degreeEdit);
+                    t.setText((String) dataSnapshot.child("degreeDesired").getValue());
+                }
+
+                if(dataSnapshot.child("fieldOfStudy").getValue() != null) {
+                    EditText t = view.findViewById(R.id.fieldOfStudyEdit);
+                    t.setText((String) dataSnapshot.child("fieldOfStudy").getValue());
+                }
+
+                if(dataSnapshot.child("semester").getValue() != null) {
+                    EditText t = view.findViewById(R.id.semesterEdit);
+                    t.setText((String) dataSnapshot.child("semester").getValue());
+                }
+
+                if(dataSnapshot.child("year").getValue() != null) {
+                    EditText t = view.findViewById(R.id.yearEdit);
+                    t.setText((String) dataSnapshot.child("year").getValue());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                //TODO: Doing nothing right now
+            }
+        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event

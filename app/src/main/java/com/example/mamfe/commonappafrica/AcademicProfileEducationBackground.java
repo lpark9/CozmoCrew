@@ -4,9 +4,20 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 /**
@@ -26,6 +37,11 @@ public class AcademicProfileEducationBackground extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private FirebaseAuth mAuth;
+    private FirebaseUser user;
+    private DatabaseReference database;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -63,8 +79,71 @@ public class AcademicProfileEducationBackground extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_academic_profile_education_background, container, false);
+        View view = inflater.inflate(R.layout.fragment_academic_profile_education_background, container, false);
+
+        this.mAuth = FirebaseAuth.getInstance();
+        this.user = mAuth.getCurrentUser();
+        this.database = FirebaseDatabase.getInstance().getReference();
+
+        //final String uid = user.getUid();
+
+        //Bind the save listener to button
+        Button saveButton = view.findViewById(R.id.saveButton);
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Update firebase
+                updateFirebaseFields();
+            }
+        });
+
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        populateFields(getView());
+    }
+
+    private void updateFirebaseFields() {
+        String uid = this.user.getUid();
+        DatabaseReference appDetails = database.child("UserProfiles").child(uid).child("educationBackground");
+
+        appDetails.child("nameOfSchool").setValue(((EditText) getView().findViewById(R.id.nameOfSchoolEdit)).getText().toString());
+        appDetails.child("level").setValue(((EditText) getView().findViewById(R.id.levelEdit)).getText().toString());
+        appDetails.child("dates").setValue(((EditText) getView().findViewById(R.id.datesAttendedEdit)).getText().toString());
+    }
+
+    private void populateFields(final View view) {
+        //TODO: Populate the fields
+        String uid = this.user.getUid();
+        database.child("UserProfiles").child(uid).child("educationBackground").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child("nameOfSchool").getValue() != null) {
+                    EditText t = view.findViewById(R.id.nameOfSchoolEdit);
+                    t.setText((String) dataSnapshot.child("nameOfSchool").getValue());
+                }
+
+                if(dataSnapshot.child("level").getValue() != null) {
+                    EditText t = view.findViewById(R.id.levelEdit);
+                    t.setText((String) dataSnapshot.child("level").getValue());
+                }
+
+                if(dataSnapshot.child("dates").getValue() != null) {
+                    EditText t = view.findViewById(R.id.datesAttendedEdit);
+                    t.setText((String) dataSnapshot.child("dates").getValue());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                //TODO: Doing nothing right now
+            }
+        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event
