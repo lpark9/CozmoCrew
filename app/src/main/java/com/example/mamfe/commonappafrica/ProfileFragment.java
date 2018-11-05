@@ -34,22 +34,17 @@ public class ProfileFragment extends Fragment {
         return view;
     }
     @OnClick (R.id.editButton) void onClick(Button v) {
-        Fragment academicHomeProfileFragment = new AcademicProfileHome();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
-        transaction.replace(R.id.frame_container, academicHomeProfileFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
 
-//        if (v.getText().toString().equals("Edit")) {
-//            v.setText("Save");
-//            editText.setEnabled(true);
-//        } else {
-//            v.setTag(0);
-//            Model.GPA = editText.getText().toString();
-//            v.setText("Edit");
-//            editText.setEnabled(false);
-//        }
+        if (v.getText().toString().equals("Edit")) {
+            v.setText("Save");
+            editText.setEnabled(true);
+        } else {
+            v.setTag(0);
+            Model.GPA = editText.getText().toString();
+            v.setText("Edit");
+            editText.setEnabled(false);
+        }
     }
 
 }
