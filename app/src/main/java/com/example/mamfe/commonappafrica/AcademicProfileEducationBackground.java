@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -95,6 +96,9 @@ public class AcademicProfileEducationBackground extends Fragment {
             public void onClick(View view) {
                 //Update firebase
                 updateFirebaseFields();
+
+                Toast feedback = Toast.makeText(view.getContext(), "Information Updated!", Toast.LENGTH_SHORT);
+                feedback.show();
             }
         });
 
@@ -115,6 +119,8 @@ public class AcademicProfileEducationBackground extends Fragment {
         appDetails.child("nameOfSchool").setValue(((EditText) getView().findViewById(R.id.nameOfSchoolEdit)).getText().toString());
         appDetails.child("level").setValue(((EditText) getView().findViewById(R.id.levelEdit)).getText().toString());
         appDetails.child("dates").setValue(((EditText) getView().findViewById(R.id.datesAttendedEdit)).getText().toString());
+
+
     }
 
     private void populateFields(final View view) {

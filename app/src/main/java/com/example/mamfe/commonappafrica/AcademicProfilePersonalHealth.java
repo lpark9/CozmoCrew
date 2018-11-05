@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -94,6 +95,9 @@ public class AcademicProfilePersonalHealth extends Fragment {
             public void onClick(View view) {
                 //Update firebase
                 updateFirebaseFields();
+
+                Toast feedback = Toast.makeText(view.getContext(), "Information Updated!", Toast.LENGTH_SHORT);
+                feedback.show();
             }
         });
 
