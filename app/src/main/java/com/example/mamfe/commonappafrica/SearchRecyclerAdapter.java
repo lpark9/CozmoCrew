@@ -36,8 +36,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/*
-  Created by Myo on 6/13/2017.
+/**
+ * Created by Myo on 6/13/2017.
+ * SearchRecyclerAdapter is for setting up the search bar in the main menu.
+ * The lists are called, and when the item is clicked, the information on the item is transferred to the next page.
  */
 
 public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAdapter.ViewHolder>
@@ -46,7 +48,11 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
     private ArrayList<String> mOriginalValues;
     private ArrayList<String> mDisplayedValues;
     private int check;
-
+    /**
+     * Method SearchRecyclerAdapter, onCreateViewHolder
+     * In the recycler, these methods add the college list to the context.
+     * This enables the user to search the colleges.
+     */
     public SearchRecyclerAdapter(Context context, int check) {
         this.context = context;
         this.mOriginalValues = new ArrayList<>();
@@ -59,7 +65,7 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
         createDisplayedValue(mOriginalValues);
         notifyDataSetChanged();
     }
-
+    
     @Override
     public SearchRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView;
@@ -69,13 +75,22 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
             itemView =  LayoutInflater.from(parent.getContext()).inflate(R.layout.item_college, parent, false);
         return new ViewHolder(itemView);
     }
-
+    /**
+     * Method onBindViewHolder
+     * Gets the college name of the selected item and bind it on to the holder 
+     * @param    holder    ViewHolder    
+     * @param    int    position    Position of the selected item
+     */
     @Override
     public void onBindViewHolder(SearchRecyclerAdapter.ViewHolder holder, int position) {
         String item = mDisplayedValues.get(position);
         holder.itemName.setText(item);
     }
-
+    
+    /**
+     * Method getItemCount
+     * @return int total count of college names displayed
+     */
     @Override
     public int getItemCount() {
         return mDisplayedValues.size();
@@ -83,9 +98,10 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
 
 
     /**
+     * Method getFilter
      * Do the filtering based on user's search input
      *
-     * @return the filtered result
+     * @return Filter the filtered result
      */
     public Filter getFilter() {
         return new Filter() {
