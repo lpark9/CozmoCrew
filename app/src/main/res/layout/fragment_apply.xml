@@ -88,7 +88,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
-   
+
     <TextView
         android:id="@+id/ranking"
         android:layout_width="wrap_content"
@@ -101,11 +101,11 @@
 
     <TextView
         android:id="@+id/website"
-        android:autoLink="all"
-        android:clickable="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
+        android:autoLink="all"
+        android:clickable="true"
         android:text="www.college.com"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -127,8 +127,6 @@
         app:layout_constraintBottom_toTopOf="@+id/add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/ranking" />
 
 </android.support.constraint.ConstraintLayout>
