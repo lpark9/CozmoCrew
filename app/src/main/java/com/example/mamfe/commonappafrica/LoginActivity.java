@@ -40,6 +40,13 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Button email = (Button) findViewById(R.id.login_button);
         Button register = (Button) findViewById(R.id.register_button);
+        Button test = (Button) findViewById(R.id.test);
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, PaymentActivity.class));
+            }
+        });
 
         mUserIdView = (EditText) findViewById(R.id.email_input);
         mPasswordView = (EditText) findViewById(R.id.passwd_input);

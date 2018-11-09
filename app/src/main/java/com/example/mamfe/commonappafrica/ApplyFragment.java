@@ -2,12 +2,14 @@ package com.example.mamfe.commonappafrica;
 
 
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ public class ApplyFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_apply, container, false);
         ButterKnife.bind(this, view);
+
         collegeName.setText(Model.selected);
         websiteName = view.findViewById(R.id.website);
         websiteName.setText(Model.websiteSelected);
