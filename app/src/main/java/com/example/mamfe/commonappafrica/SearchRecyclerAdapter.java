@@ -79,7 +79,6 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
      * Method onBindViewHolder
      * Gets the college name of the selected item and bind it on to the holder 
      * @param    holder    ViewHolder    
-     * @param    int    position    Position of the selected item
      */
     @Override
     public void onBindViewHolder(SearchRecyclerAdapter.ViewHolder holder, int position) {
