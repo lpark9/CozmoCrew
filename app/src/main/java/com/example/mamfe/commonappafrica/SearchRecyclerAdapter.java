@@ -78,7 +78,7 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
     /**
      * Method onBindViewHolder
      * Gets the college name of the selected item and bind it on to the holder 
-     * @param    holder    ViewHolder    
+     * @param    holder    ViewHolder
      */
     @Override
     public void onBindViewHolder(SearchRecyclerAdapter.ViewHolder holder, int position) {
@@ -177,7 +177,8 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
             int position = getAdapterPosition();
             Model.selected = mDisplayedValues.get(position);
             AppCompatActivity activity = (AppCompatActivity) context;
-
+            Model.websiteSelected = Model.websiteList.get(position);
+            Model.rankingSelected = Model.rankingList.get(position);
             Fragment applyFragment = new ApplyFragment();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.replace(R.id.frame_container, applyFragment);
