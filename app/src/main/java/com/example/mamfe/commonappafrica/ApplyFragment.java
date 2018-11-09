@@ -21,15 +21,20 @@ import butterknife.OnClick;
  */
 public class ApplyFragment extends Fragment {
 
-
+    TextView websiteName, rankingNum;
     @BindView(R.id.collegeName)
     TextView collegeName;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_apply, container, false);
         ButterKnife.bind(this, view);
         collegeName.setText(Model.selected);
+        websiteName = view.findViewById(R.id.website);
+        websiteName.setText(Model.websiteSelected);
+        rankingNum = view.findViewById(R.id.ranking);
+        rankingNum.setText(Model.rankingSelected);
         return view;
     }
     @OnClick (R.id.add) void onClick() {
@@ -55,3 +60,4 @@ public class ApplyFragment extends Fragment {
     }
 
 }
+
