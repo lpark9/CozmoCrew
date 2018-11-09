@@ -36,7 +36,10 @@ public class PaymentActivity extends AppCompatActivity{
 
         cardNumber = (EditText) findViewById(R.id.CardNumber);
         cardNumber.addTextChangedListener(new CardNumberFormatting());
+
         expirationDate = (EditText) findViewById(R.id.ExpirationDate);
+        expirationDate.addTextChangedListener(new dateNumberFormatting());
+
         CVV = (EditText) findViewById(R.id.CVV);
         address = (EditText) findViewById(R.id.address);
 
@@ -44,7 +47,7 @@ public class PaymentActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 if (cardNumber.length() == 16 + 3 &&
-                        expirationDate.length() == 4 &&
+                        expirationDate.length() == 4+1 &&
                         CVV.length() == 3) {
                     Toast.makeText(PaymentActivity.this, "Payment Confirmed!", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(PaymentActivity.this, MainActivity.class));
@@ -83,6 +86,32 @@ public class PaymentActivity extends AppCompatActivity{
             for (int i = 4; i < s.length(); i += 5) {
                 if (s.toString().charAt(i) != ' ') {
                     s.insert(i, " ");
+                }
+            }
+            lock = false;
+        }
+    }
+
+    public static class dateNumberFormatting implements TextWatcher {
+        private boolean lock;
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if (lock || s.length() > 4) {
+                return;
+            }
+            lock = true;
+            for (int i = 2; i < s.length(); i += 2) {
+                if (s.toString().charAt(i) != ' ') {
+                    s.insert(i, "/");
                 }
             }
             lock = false;

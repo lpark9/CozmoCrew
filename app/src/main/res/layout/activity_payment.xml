@@ -47,6 +47,7 @@
         android:state_focused="true" android:color="@android:color/transparent"
         android:width="360sp"
         android:hint="Card Number"
+        android:maxLength="19"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />
 
@@ -58,6 +59,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:width="240sp"
+        android:maxLength="5"
         android:hint="MM/YY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CardNumber" />
@@ -71,6 +73,7 @@
         android:state_focused="true" android:color="@android:color/transparent"
         android:width="120sp"
         android:hint="CVV"
+        android:maxLength="3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CardNumber" />
 
