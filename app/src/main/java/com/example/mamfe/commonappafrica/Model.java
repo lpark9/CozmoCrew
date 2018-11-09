@@ -20,8 +20,12 @@ public class Model {
     public static String HSname;
     public static String GPA = "4.0";
     public static String selected = new String();
+    public static String websiteSelected = new String();
+    public static String rankingSelected = new String();
     public static ArrayList<String> myColleges = new ArrayList<>(Arrays.asList("University of Buea"));
     public static ArrayList<String> collegeList = new ArrayList<>();
+    public static ArrayList<String> rankingList = new ArrayList<>();
+    public static ArrayList<String> websiteList = new ArrayList<>();
     /**
     *   populateStockList
     *   This method gets the list of college list from the json file.
@@ -34,6 +38,10 @@ public class Model {
                 JSONObject jsonObj = jsonArray.getJSONObject(i);
                 String item = jsonObj.getString("id");
                 collegeList.add(item);
+                String item_2 = jsonObj.getString("website");
+                websiteList.add(item_2);
+                String item_3 = jsonObj.getString("ranking");
+                rankingList.add(item_3);
             }
         } catch (JSONException e) {
             e.printStackTrace();
