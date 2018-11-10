@@ -45,6 +45,7 @@ public class AcademicProfileApplicationDetails extends Fragment {
     private DatabaseReference database;
 
     private OnFragmentInteractionListener mListener;
+    private boolean isApplying;
 
     public AcademicProfileApplicationDetails() {
         // Required empty public constructor
@@ -53,6 +54,12 @@ public class AcademicProfileApplicationDetails extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            isApplying = bundle.getBoolean("isApplying");
+        } else {
+            isApplying = false;
+        }
     }
 
     @Override
@@ -68,6 +75,7 @@ public class AcademicProfileApplicationDetails extends Fragment {
 
         //Bind the save listener to button
         Button saveButton = view.findViewById(R.id.saveButton);
+        Button nextButton = view.findViewById(R.id.next_button);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +86,20 @@ public class AcademicProfileApplicationDetails extends Fragment {
                 Toast feedback = Toast.makeText(view.getContext(), "Information Updated!", Toast.LENGTH_SHORT);
                 feedback.show();
 
+            }
+        });
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("isApplying", isApplying);
+                Fragment education = new AcademicProfileEducationBackground();
+                education.setArguments(bundle);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_container, education);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 

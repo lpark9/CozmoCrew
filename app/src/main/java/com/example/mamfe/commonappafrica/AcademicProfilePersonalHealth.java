@@ -1,5 +1,6 @@
 package com.example.mamfe.commonappafrica;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -45,6 +46,8 @@ public class AcademicProfilePersonalHealth extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+    private boolean isApplying;
+
     public AcademicProfilePersonalHealth() {
         // Required empty public constructor
     }
@@ -74,6 +77,13 @@ public class AcademicProfilePersonalHealth extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            isApplying = bundle.getBoolean("isApplying");
+        } else {
+            isApplying = false;
+        }
     }
 
     @Override
@@ -89,6 +99,8 @@ public class AcademicProfilePersonalHealth extends Fragment {
 
         //Bind the save listener to button
         Button saveButton = view.findViewById(R.id.saveButton);
+        Button nextButton = view.findViewById(R.id.next_button);
+        Button prevButton = view.findViewById(R.id.prev_button);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +110,34 @@ public class AcademicProfilePersonalHealth extends Fragment {
 
                 Toast feedback = Toast.makeText(view.getContext(), "Information Updated!", Toast.LENGTH_SHORT);
                 feedback.show();
+            }
+        });
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("isApplying", isApplying);
+                Fragment workExperience = new AcademicProfileWorkExperience();
+                workExperience.setArguments(bundle);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_container, workExperience);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
+        prevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("isApplying", isApplying);
+                Fragment generalInfo = new AcademicProfileGeneralInfo();
+                generalInfo.setArguments(bundle);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_container, generalInfo);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 

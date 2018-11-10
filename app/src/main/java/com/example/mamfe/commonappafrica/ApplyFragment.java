@@ -1,7 +1,9 @@
 package com.example.mamfe.commonappafrica;
 
 
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -42,10 +44,16 @@ public class ApplyFragment extends Fragment {
     }
     @OnClick (R.id.add) void onClick() {
         CustomDialog dialog = new CustomDialog(getContext());
-        dialog.show();
-        dialog.setText(Model.selected + " had been added to your 'My Colleges' list");
+        if (Model.myColleges.contains(Model.selected)) {
+            dialog.show();
+            dialog.setText(Model.selected + " is already in your 'My Colleges' list");
+        } else {
+            dialog.show();
+            dialog.setText(Model.selected + " had been added to your 'My Colleges' list");
+            Model.myColleges.add(Model.selected);
+        }
+
         //Toast.makeText(getContext(), , Toast.LENGTH_SHORT).show();
-        Model.myColleges.add(Model.selected);
     }
     @OnClick (R.id.apply) void onClick2() {
         AppCompatActivity activity = (AppCompatActivity) getContext();
@@ -54,11 +62,38 @@ public class ApplyFragment extends Fragment {
             Model.myColleges.add(Model.selected);
         }
 
-        Fragment essayFragment = new EssayFragment();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_container, essayFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+        alertDialog.setMessage("Do you want to check your profile before submitting?");
+        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("isApplying", true);
+                Fragment details = new AcademicProfileApplicationDetails();
+                details.setArguments(bundle);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_container, details);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                startActivity(new Intent(getActivity(), PaymentActivity.class));
+            }
+        });
+
+
+        AlertDialog alert = alertDialog.create();
+        alert.show();
+
+//
+//        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//        transaction.replace(R.id.frame_container, essayFragment);
+//        transaction.addToBackStack(null);
+//        transaction.commit();
 
     }
 
