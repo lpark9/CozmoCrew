@@ -48,7 +48,8 @@ public class PaymentActivity extends AppCompatActivity{
             public void onClick(View v) {
                 if (cardNumber.length() == 16 + 3 &&
                         expirationDate.length() == 4+1 &&
-                        CVV.length() == 3) {
+                        CVV.length() == 3 &&
+                        address.length() > 0) {
                     Toast.makeText(PaymentActivity.this, "Payment Confirmed!", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(PaymentActivity.this, MainActivity.class));
                 } else {
@@ -67,8 +68,6 @@ public class PaymentActivity extends AppCompatActivity{
     }
 
     public static class CardNumberFormatting implements TextWatcher{
-
-        private boolean lock;
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
         }
@@ -79,21 +78,15 @@ public class PaymentActivity extends AppCompatActivity{
 
         @Override
         public void afterTextChanged(Editable s) {
-            if (lock || s.length() > 16) {
-                return;
-            }
-            lock = true;
             for (int i = 4; i < s.length(); i += 5) {
                 if (s.toString().charAt(i) != ' ') {
                     s.insert(i, " ");
                 }
             }
-            lock = false;
         }
     }
 
     public static class dateNumberFormatting implements TextWatcher {
-        private boolean lock;
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
 
@@ -105,16 +98,11 @@ public class PaymentActivity extends AppCompatActivity{
 
         @Override
         public void afterTextChanged(Editable s) {
-            if (lock || s.length() > 4) {
-                return;
-            }
-            lock = true;
-            for (int i = 2; i < s.length(); i += 2) {
-                if (s.toString().charAt(i) != ' ') {
+            for (int i = 2; i < s.length(); i += 3) {
+                if (s.toString().charAt(i) != '/') {
                     s.insert(i, "/");
                 }
             }
-            lock = false;
         }
     }
 }
