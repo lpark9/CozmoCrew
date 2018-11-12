@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mUserIdView;
     private EditText mPasswordView;
     private FirebaseAuth mAuth;
-
+    public static String userId, userName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +82,8 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.makeText(LoginActivity.this, "Invalid Credential", Toast.LENGTH_LONG).show();
                                     }
                                 } else {
+                                    userId = mAuth.getCurrentUser().getEmail();
+                                    userName = mAuth.getCurrentUser().getDisplayName();
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intent);
                                     finish();
