@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
         TextView navUserName = headerView.findViewById(R.id.userName);
-        navUserName.setText("Needs to be updated in Main/Login");
+        navUserName.setText(LoginActivity.getUserName());
         TextView navUserEmail = headerView.findViewById(R.id.userID);
         navUserEmail.setText(LoginActivity.getUserId());
         expandableListView = findViewById(R.id.expandableListView);
