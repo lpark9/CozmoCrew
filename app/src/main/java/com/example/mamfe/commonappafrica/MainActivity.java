@@ -19,6 +19,7 @@ import android.webkit.WebView;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ import java.util.List;
 
 import butterknife.OnClick;
 
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity
     ExpandableListView expandableListView;
     List<MenuModel> headerList = new ArrayList<>();
     HashMap<MenuModel, List<MenuModel>> childList = new HashMap<>();
+    //added
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +44,21 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        
 
-        
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUserName = headerView.findViewById(R.id.userName);
+        navUserName.setText("Needs to be updated in Main/Login");
+        TextView navUserEmail = headerView.findViewById(R.id.userID);
+        navUserEmail.setText(LoginActivity.getUserId());
         expandableListView = findViewById(R.id.expandableListView);
         prepareMenuData();
         populateExpandableList();
@@ -347,3 +353,4 @@ public class MainActivity extends AppCompatActivity
 
 
 }
+
