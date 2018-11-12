@@ -13,11 +13,11 @@
     <TextView
         android:id="@+id/textView7"
         android:layout_width="258dp"
-        android:layout_height="43dp"
+        android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Application Details"
+        android:text="Application Details\nDétail de l'application"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textStyle="bold"
@@ -40,10 +40,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="4"
-            android:text="year"
+            android:text="Year\nAnnée"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
             android:textStyle="bold"
+            android:textSize="11sp"
             tools:layout_editor_absoluteX="55dp"
             tools:layout_editor_absoluteY="107dp" />
 
@@ -74,10 +75,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="4"
-            android:text="Field of Study"
+            android:text="Field of Study\nMajor"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
             android:textStyle="bold"
+            android:textSize="11sp"
             tools:layout_editor_absoluteX="55dp"
             tools:layout_editor_absoluteY="107dp" />
 
@@ -108,10 +110,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="4"
-            android:text="Semester"
+            android:text="Semester\nSemestre"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
             android:textStyle="bold"
+            android:textSize="11sp"
             tools:layout_editor_absoluteX="55dp"
             tools:layout_editor_absoluteY="107dp" />
 
@@ -142,10 +145,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="4"
-            android:text="Degree Desired"
+            android:text="Degree Desired\nBS/Maître/Docteur"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
             android:textStyle="bold"
+            android:textSize="11sp"
             tools:layout_editor_absoluteX="55dp"
             tools:layout_editor_absoluteY="107dp" />
 
@@ -166,7 +170,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:text="Save"
+        android:text="Save\nEnregistrer"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="447dp"
         android:layout_marginBottom="16dp"
@@ -177,7 +181,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Next"
+        android:text="Next\nSuivant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/saveButton"
         tools:layout_editor_absoluteY="446dp"

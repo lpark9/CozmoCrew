@@ -8,11 +8,11 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="389dp"
-        android:layout_height="217dp"
+        android:layout_width="411dp"
+        android:layout_height="280dp"
         android:alpha="0.5"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/login_cover"
+        app:srcCompat="@drawable/login_background"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
@@ -23,7 +23,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Common Application for Africa"
+        android:text=""
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         android:textSize="30sp"
@@ -89,13 +89,5 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_button" />
-
-    <Button
-        android:id="@+id/test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="test"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="482dp" />
 
 </android.support.constraint.ConstraintLayout>
