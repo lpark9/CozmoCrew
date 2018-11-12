@@ -179,6 +179,12 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
             AppCompatActivity activity = (AppCompatActivity) context;
             Model.websiteSelected = Model.websiteList.get(position);
             Model.rankingSelected = Model.rankingList.get(position);
+
+            Model.rateSelected = Model.rateList.get(position);
+            Model.deadlineSelected = Model.deadlineList.get(position);
+            Model.totalSelected = Model.totalList.get(position);
+            Model.tuitionSelected = Model.tuitionList.get(position);
+
             Fragment applyFragment = new ApplyFragment();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.replace(R.id.frame_container, applyFragment);
@@ -189,4 +195,3 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
 
     }
 }
-
