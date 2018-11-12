@@ -13,6 +13,7 @@ import java.util.Arrays;
 
 /**
  * Created by Myo Thiha on 4/5/2018.
+ * Editted by Eun Bin Lee on 11/12/2018.
  * This class Model is created to setup basic university lists from the json file.
  */
 
@@ -22,10 +23,23 @@ public class Model {
     public static String selected = new String();
     public static String websiteSelected = new String();
     public static String rankingSelected = new String();
+
+    public static String tuitionSelected = new String();
+    public static String rateSelected = new String();
+    public static String totalSelected = new String();
+    public static String deadlineSelected = new String();
+
     public static ArrayList<String> myColleges = new ArrayList<>(Arrays.asList("University of Buea"));
     public static ArrayList<String> collegeList = new ArrayList<>();
     public static ArrayList<String> rankingList = new ArrayList<>();
     public static ArrayList<String> websiteList = new ArrayList<>();
+
+    public static ArrayList<String> rateList = new ArrayList<>();
+    public static ArrayList<String> tuitionList = new ArrayList<>();
+    public static ArrayList<String> totalList = new ArrayList<>();
+    public static ArrayList<String> deadlineList = new ArrayList<>();
+
+
     /**
     *   populateStockList
     *   This method gets the list of college list from the json file.
@@ -42,6 +56,14 @@ public class Model {
                 websiteList.add(item_2);
                 String item_3 = jsonObj.getString("ranking");
                 rankingList.add(item_3);
+                String item_4 = jsonObj.getString("acceptance");
+                rateList.add(item_4);
+                String item_5 = jsonObj.getString("tuition");
+                tuitionList.add(item_5);
+                String item_6 = jsonObj.getString("total");
+                totalList.add(item_6);
+                String item_7 = jsonObj.getString("deadline");
+                deadlineList.add(item_7);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -68,3 +90,4 @@ public class Model {
         return json;
     }
 }
+
