@@ -25,7 +25,7 @@ import butterknife.OnClick;
  */
 public class ApplyFragment extends Fragment {
 
-    TextView websiteName, rankingNum;
+    TextView websiteName, rankingNum, acceptance, tuition_num, total_num, duedate;
     @BindView(R.id.collegeName)
     TextView collegeName;
 
@@ -40,6 +40,16 @@ public class ApplyFragment extends Fragment {
         websiteName.setText(Model.websiteSelected);
         rankingNum = view.findViewById(R.id.ranking);
         rankingNum.setText(Model.rankingSelected);
+
+        acceptance = view.findViewById(R.id.acceptance_rate);
+        acceptance.setText(Model.rateSelected);
+        tuition_num = view.findViewById(R.id.tuition_fees);
+        tuition_num.setText(Model.tuitionSelected);
+        total_num = view.findViewById(R.id.enrollment_num);
+        total_num.setText(Model.totalSelected);
+        duedate = view.findViewById(R.id.deadline);
+        duedate.setText(Model.deadlineSelected);
+
         return view;
     }
     @OnClick (R.id.add) void onClick() {
