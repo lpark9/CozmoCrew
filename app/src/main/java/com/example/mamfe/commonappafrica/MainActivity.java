@@ -29,7 +29,7 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    TextView userId_view, userName_view;
     ExpandableListAdapter expandableListAdapter;
     ExpandableListView expandableListView;
     List<MenuModel> headerList = new ArrayList<>();
@@ -41,7 +41,15 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        
+        //calls user name and Id from the static string in login activity 
+        userId_view = findViewById(R.id.userID);
+        userName_view = findViewById(R.id.userName);
+        if (LoginActivity.userId != null && LoginActivity.userName != null) {
+            userId_view.setText(LoginActivity.userId);
+            userName_view.setText(LoginActivity.userName);
+        }
+        
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
