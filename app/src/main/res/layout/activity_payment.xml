@@ -35,6 +35,7 @@
         android:alpha="0.5"
         android:scaleType="centerCrop"
         app:layout_constraintLeft_toRightOf="@+id/Payment"
+        app:layout_constraintBottom_toTopOf="@+id/CardNumber"
         app:srcCompat="@drawable/weaccept"
         tools:layout_editor_absoluteY="56dp" />
 
