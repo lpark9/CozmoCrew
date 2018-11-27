@@ -18,14 +18,19 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText mUserIdView;
     private EditText mPasswordView;
     private FirebaseAuth mAuth;
+    private DatabaseReference databaseR;
+    private String key;
 
     //added
     private static String userId, userName;
@@ -37,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
+
 
 //        if (mAuth.getCurrentUser() != null) {
 //            startActivity(new Intent(LoginActivity.this, MainActivity.class));
