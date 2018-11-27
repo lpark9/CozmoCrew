@@ -1,7 +1,9 @@
 package com.example.mamfe.commonappafrica;
 
+import android.app.DatePickerDialog;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -20,6 +23,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 
 /**
@@ -43,6 +49,8 @@ public class AcademicProfileGeneralInfo extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseUser user;
     private DatabaseReference database;
+
+    private Calendar birthCalendar;
 
 
     private OnFragmentInteractionListener mListener;
@@ -85,6 +93,43 @@ public class AcademicProfileGeneralInfo extends Fragment {
         }
     }
 
+    private void updateLabel() {
+        String myFormat = "MM/dd/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        ((EditText) getView().findViewById(R.id.dateOfBirthEdit)).setText(sdf.format(birthCalendar.getTime()));
+    }
+
+    private void buildCalendar() {
+        //Build the date picker
+        birthCalendar = Calendar.getInstance();
+
+        EditText edittext= (EditText) getView().findViewById(R.id.dateOfBirthEdit);
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                // TODO Auto-generated method stub
+                birthCalendar.set(Calendar.YEAR, year);
+                birthCalendar.set(Calendar.MONTH, monthOfYear);
+                birthCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+        };
+
+        edittext.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(getActivity(), date, birthCalendar
+                        .get(Calendar.YEAR), birthCalendar.get(Calendar.MONTH),
+                        birthCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -95,6 +140,8 @@ public class AcademicProfileGeneralInfo extends Fragment {
         this.database = FirebaseDatabase.getInstance().getReference();
 
         //final String uid = user.getUid();
+
+
 
         //Bind the save listener to button
         Button saveButton = view.findViewById(R.id.saveButton);
@@ -146,7 +193,7 @@ public class AcademicProfileGeneralInfo extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        buildCalendar();
         populateFields(getView());
     }
 

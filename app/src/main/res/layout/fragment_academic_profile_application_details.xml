@@ -33,13 +33,13 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
         <TextView
             android:id="@+id/yearLabel"
-            android:layout_width="match_parent"
+            android:layout_width="0px"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+            android:layout_weight="2"
             android:text="Year\nAnnée"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
@@ -48,15 +48,30 @@
             tools:layout_editor_absoluteX="55dp"
             tools:layout_editor_absoluteY="107dp" />
 
-        <EditText
-            android:id="@+id/yearEdit"
-            android:layout_width="match_parent"
+        <Spinner
+            android:id="@+id/yearSpinner"
+            android:layout_weight="4"
+            android:layout_width="0px"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/semesterLabel"
+            android:layout_width="0px"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:ems="10"
-            android:inputType="textPersonName"
-            tools:layout_editor_absoluteX="134dp"
-            tools:layout_editor_absoluteY="92dp" />
+            android:text="Semester\nSemestre"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+            android:textStyle="bold"
+            android:textSize="11sp"
+            tools:layout_editor_absoluteX="55dp"
+            tools:layout_editor_absoluteY="107dp" />
+
+        <Spinner
+            android:id="@+id/semesterSpinner"
+            android:layout_weight="4"
+            android:layout_width="0px"
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 
@@ -95,40 +110,7 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="384dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
-        <TextView
-            android:id="@+id/semesterLabel"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:text="Semester\nSemestre"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
-            android:textStyle="bold"
-            android:textSize="11sp"
-            tools:layout_editor_absoluteX="55dp"
-            tools:layout_editor_absoluteY="107dp" />
-
-        <EditText
-            android:id="@+id/semesterEdit"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:ems="10"
-            android:inputType="textPersonName"
-            tools:layout_editor_absoluteX="134dp"
-            tools:layout_editor_absoluteY="92dp" />
-
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout4"

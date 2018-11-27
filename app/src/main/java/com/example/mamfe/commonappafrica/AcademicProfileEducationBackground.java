@@ -1,7 +1,9 @@
 package com.example.mamfe.commonappafrica;
 
+import android.app.DatePickerDialog;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -20,6 +23,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 
 /**
@@ -44,6 +50,8 @@ public class AcademicProfileEducationBackground extends Fragment {
     private FirebaseUser user;
     private DatabaseReference database;
 
+    private Calendar startCalendar;
+    private Calendar endCalendar;
 
     private OnFragmentInteractionListener mListener;
     private boolean isApplying;
@@ -83,6 +91,76 @@ public class AcademicProfileEducationBackground extends Fragment {
         } else {
             isApplying = false;
         }
+    }
+
+    private void buildCalendar() {
+        //Build the date picker
+        startCalendar = Calendar.getInstance();
+        endCalendar = Calendar.getInstance();
+
+        EditText startDateEditText = (EditText) getView().findViewById(R.id.startDateEdit);
+        final DatePickerDialog.OnDateSetListener startDate = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                // TODO Auto-generated method stub
+                startCalendar.set(Calendar.YEAR, year);
+                startCalendar.set(Calendar.MONTH, monthOfYear);
+                startCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateStartLabel();
+            }
+
+        };
+
+        startDateEditText.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(getActivity(), startDate, startCalendar
+                        .get(Calendar.YEAR), startCalendar.get(Calendar.MONTH),
+                        startCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        EditText endDateEditText = (EditText) getView().findViewById(R.id.endDateEdit);
+        final DatePickerDialog.OnDateSetListener endDate = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                // TODO Auto-generated method stub
+                endCalendar.set(Calendar.YEAR, year);
+                endCalendar.set(Calendar.MONTH, monthOfYear);
+                endCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateEndLabel();
+            }
+
+        };
+
+        endDateEditText.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(getActivity(), endDate, endCalendar
+                        .get(Calendar.YEAR), endCalendar.get(Calendar.MONTH),
+                        endCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+    }
+
+    private void updateStartLabel() {
+        String myFormat = "MM/dd/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        ((EditText) getView().findViewById(R.id.startDateEdit)).setText(sdf.format(startCalendar.getTime()));
+    }
+
+    private void updateEndLabel() {
+        String myFormat = "MM/dd/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        ((EditText) getView().findViewById(R.id.endDateEdit)).setText(sdf.format(endCalendar.getTime()));
     }
 
     @Override
@@ -146,7 +224,7 @@ public class AcademicProfileEducationBackground extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        buildCalendar();
         populateFields(getView());
     }
 
@@ -156,8 +234,8 @@ public class AcademicProfileEducationBackground extends Fragment {
 
         appDetails.child("nameOfSchool").setValue(((EditText) getView().findViewById(R.id.nameOfSchoolEdit)).getText().toString());
         appDetails.child("level").setValue(((EditText) getView().findViewById(R.id.levelEdit)).getText().toString());
-        appDetails.child("dates").setValue(((EditText) getView().findViewById(R.id.datesAttendedEdit)).getText().toString());
-
+        appDetails.child("dates").child("start").setValue(((EditText) getView().findViewById(R.id.startDateEdit)).getText().toString());
+        appDetails.child("dates").child("end").setValue(((EditText) getView().findViewById(R.id.endDateEdit)).getText().toString());
 
     }
 
@@ -177,9 +255,14 @@ public class AcademicProfileEducationBackground extends Fragment {
                     t.setText((String) dataSnapshot.child("level").getValue());
                 }
 
-                if(dataSnapshot.child("dates").getValue() != null) {
-                    EditText t = view.findViewById(R.id.datesAttendedEdit);
-                    t.setText((String) dataSnapshot.child("dates").getValue());
+                if(dataSnapshot.child("dates").child("start").getValue() != null) {
+                    EditText t = view.findViewById(R.id.startDateEdit);
+                    t.setText((String) dataSnapshot.child("dates").child("start").getValue());
+                }
+
+                if(dataSnapshot.child("dates").child("end").getValue() != null) {
+                    EditText t = view.findViewById(R.id.endDateEdit);
+                    t.setText((String) dataSnapshot.child("dates").child("end").getValue());
                 }
             }
 

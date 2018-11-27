@@ -106,11 +106,11 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
         <TextView
-            android:id="@+id/datesLabel"
-            android:layout_width="match_parent"
+            android:id="@+id/startDateLabel"
+            android:layout_width="0px"
             android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:text="Dates\nDates"
+            android:layout_weight="2.5"
+            android:text="Start Date\nDate de début"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
             android:textStyle="bold"
@@ -119,12 +119,39 @@
             tools:layout_editor_absoluteY="107dp" />
 
         <EditText
-            android:id="@+id/datesEdit"
-            android:layout_width="match_parent"
+            android:id="@+id/startDateEdit"
+            android:layout_width="0px"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="4"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="none"
+            android:focusable="false"
+            android:clickable="true"
+            tools:layout_editor_absoluteX="134dp"
+            tools:layout_editor_absoluteY="92dp" />
+
+        <TextView
+            android:id="@+id/endDateLabel"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="2.5"
+            android:text="End Date\nDate de fin"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+            android:textStyle="bold"
+            android:textSize="11sp"
+            tools:layout_editor_absoluteX="55dp"
+            tools:layout_editor_absoluteY="107dp" />
+
+        <EditText
+            android:id="@+id/endDateEdit"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:ems="10"
+            android:inputType="none"
+            android:focusable="false"
+            android:clickable="true"
             tools:layout_editor_absoluteX="134dp"
             tools:layout_editor_absoluteY="92dp" />
 

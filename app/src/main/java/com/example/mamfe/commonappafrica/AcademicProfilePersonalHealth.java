@@ -1,7 +1,9 @@
 package com.example.mamfe.commonappafrica;
 
+import android.app.DatePickerDialog;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -10,7 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,6 +25,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 
 /**
@@ -47,6 +55,8 @@ public class AcademicProfilePersonalHealth extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private boolean isApplying;
+
+
 
     public AcademicProfilePersonalHealth() {
         // Required empty public constructor
@@ -144,6 +154,8 @@ public class AcademicProfilePersonalHealth extends Fragment {
         return view;
     }
 
+
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -155,12 +167,66 @@ public class AcademicProfilePersonalHealth extends Fragment {
         String uid = this.user.getUid();
         DatabaseReference appDetails = database.child("UserProfiles").child(uid).child("personalHealth");
 
-        appDetails.child("doYouUseDrugs").setValue(((EditText) getView().findViewById(R.id.doYouUseDrugsEdit)).getText().toString());
-        appDetails.child("haveYouUsedDrugs").setValue(((EditText) getView().findViewById(R.id.haveYouEverUsedEdit)).getText().toString());
-        appDetails.child("doYouDrink").setValue(((EditText) getView().findViewById(R.id.doYouDrinkEdit)).getText().toString());
-        appDetails.child("haveYouDrank").setValue(((EditText) getView().findViewById(R.id.haveYouEverDrankEdit)).getText().toString());
-        appDetails.child("doYouSmoke").setValue(((EditText) getView().findViewById(R.id.doYouSmokeEdit)).getText().toString());
-        appDetails.child("haveYouSmoked").setValue(((EditText) getView().findViewById(R.id.haveYouEverSmokedEdit)).getText().toString());
+        RadioGroup doYouUseDrugsRadioGroup = getView().findViewById(R.id.doYouUseDrugsRadio);
+        int doYouUseDrugsCheckedButtonId = doYouUseDrugsRadioGroup.getCheckedRadioButtonId();
+
+        if(doYouUseDrugsCheckedButtonId != -1) {
+            RadioButton doYouUseDrugsCheckedButton = (RadioButton) doYouUseDrugsRadioGroup.findViewById(doYouUseDrugsCheckedButtonId);
+            appDetails.child("doYouUseDrugs").setValue(doYouUseDrugsCheckedButton.getText().toString());
+        } else {
+            appDetails.child("doYouUseDrugs").setValue(null);
+        }
+
+        RadioGroup haveYouEverUsedDrugsRadioGroup = getView().findViewById(R.id.haveYouEverUsedRadio);
+        int haveYouEverUsedDrugsCheckedButtonId = haveYouEverUsedDrugsRadioGroup.getCheckedRadioButtonId();
+
+        if(haveYouEverUsedDrugsCheckedButtonId != -1) {
+            RadioButton haveYouEverUsedDrugsCheckedButton = (RadioButton) haveYouEverUsedDrugsRadioGroup.findViewById(haveYouEverUsedDrugsCheckedButtonId);
+            appDetails.child("haveYouEverUsedDrugs").setValue(haveYouEverUsedDrugsCheckedButton.getText().toString());
+        } else {
+            appDetails.child("haveYouEverUsedDrugs").setValue(null);
+        }
+
+        RadioGroup doYouDrinkRadioGroup = getView().findViewById(R.id.doYouDrinkRadio);
+        int doYouDrinkCheckedButtonId = doYouDrinkRadioGroup.getCheckedRadioButtonId();
+
+        if(doYouDrinkCheckedButtonId != -1) {
+            RadioButton doYouDrinkCheckedButton = (RadioButton) doYouDrinkRadioGroup.findViewById(doYouDrinkCheckedButtonId);
+            appDetails.child("doYouDrink").setValue(doYouDrinkCheckedButton.getText().toString());
+        } else {
+            appDetails.child("doYouDrink").setValue(null);
+        }
+
+        RadioGroup haveYouDrankRadioGroup = getView().findViewById(R.id.haveYouEverDrankRadio);
+        int haveYouDrankCheckedButtonId = haveYouDrankRadioGroup.getCheckedRadioButtonId();
+
+        if(haveYouDrankCheckedButtonId != -1) {
+            RadioButton doYouUseDrugsCheckedButton = (RadioButton) haveYouDrankRadioGroup.findViewById(haveYouDrankCheckedButtonId);
+            appDetails.child("haveYouDrank").setValue(doYouUseDrugsCheckedButton.getText().toString());
+        } else {
+            appDetails.child("haveYouDrank").setValue(null);
+        }
+
+        RadioGroup doYouSmokeRadioGroup = getView().findViewById(R.id.doYouSmokeRadio);
+        int doYouSmokeCheckedButtonId = doYouSmokeRadioGroup.getCheckedRadioButtonId();
+
+        if(doYouSmokeCheckedButtonId != -1) {
+            RadioButton doYouSmokeCheckedButton = (RadioButton) doYouSmokeRadioGroup.findViewById(doYouSmokeCheckedButtonId);
+            appDetails.child("doYouSmoke").setValue(doYouSmokeCheckedButton.getText().toString());
+        } else {
+            appDetails.child("doYouSmoke").setValue(null);
+        }
+
+        RadioGroup haveYouEverSmokedRadioGroup = getView().findViewById(R.id.haveYouEverSmokedRadio);
+        int haveYouEverSmokedCheckedButtonId = haveYouEverSmokedRadioGroup.getCheckedRadioButtonId();
+
+        if(haveYouEverSmokedCheckedButtonId != -1) {
+            RadioButton haveYouEverSmokedCheckedButton = (RadioButton) haveYouEverSmokedRadioGroup.findViewById(haveYouEverSmokedCheckedButtonId);
+            appDetails.child("haveYouEverSmoked").setValue(haveYouEverSmokedCheckedButton.getText().toString());
+        } else {
+            appDetails.child("haveYouEverSmoked").setValue(null);
+        }
+
     }
 
     private void populateFields(final View view) {
@@ -169,34 +235,60 @@ public class AcademicProfilePersonalHealth extends Fragment {
         database.child("UserProfiles").child(uid).child("personalHealth").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                RadioGroup doYouUseDrugsRadioGroup = view.findViewById(R.id.doYouUseDrugsRadio);
+                RadioGroup haveYouEverUsedDrugsRadioGroup = view.findViewById(R.id.haveYouEverUsedRadio);
+                RadioGroup doYouDrinkRadioGroup = view.findViewById(R.id.doYouDrinkRadio);
+                RadioGroup haveYouDrankRadioGroup = view.findViewById(R.id.haveYouEverDrankRadio);
+                RadioGroup doYouSmokeRadioGroup = view.findViewById(R.id.doYouSmokeRadio);
+                RadioGroup haveYouEverSmokedRadioGroup = view.findViewById(R.id.haveYouEverSmokedRadio);
+
                 if(dataSnapshot.child("doYouUseDrugs").getValue() != null) {
-                    EditText t = view.findViewById(R.id.doYouUseDrugsEdit);
-                    t.setText((String) dataSnapshot.child("doYouUseDrugs").getValue());
+                    if(((String) dataSnapshot.child("doYouUseDrugs").getValue()).equals("Yes")) {
+                        doYouUseDrugsRadioGroup.check(R.id.doYouUseDrugsRadioYes);
+                    } else {
+                        doYouUseDrugsRadioGroup.check(R.id.doYouUseDrugsRadioNo);
+                    }
                 }
 
-                if(dataSnapshot.child("haveYouUsedDrugs").getValue() != null) {
-                    EditText t = view.findViewById(R.id.haveYouEverUsedEdit);
-                    t.setText((String) dataSnapshot.child("haveYouUsedDrugs").getValue());
+                if(dataSnapshot.child("haveYouEverUsedDrugs").getValue() != null) {
+                    if(((String) dataSnapshot.child("haveYouEverUsedDrugs").getValue()).equals("Yes")) {
+                        haveYouEverUsedDrugsRadioGroup.check(R.id.haveYouEverUsedRadioYes);
+                    } else {
+                        haveYouEverUsedDrugsRadioGroup.check(R.id.haveYouEverUsedRadioNo);
+                    }
                 }
 
                 if(dataSnapshot.child("doYouDrink").getValue() != null) {
-                    EditText t = view.findViewById(R.id.doYouDrinkEdit);
-                    t.setText((String) dataSnapshot.child("doYouDrink").getValue());
+                    if(((String) dataSnapshot.child("doYouDrink").getValue()).equals("Yes")) {
+                        doYouDrinkRadioGroup.check(R.id.doYouDrinkRadioYes);
+                    } else {
+                        doYouDrinkRadioGroup.check(R.id.doYouDrinkRadioNo);
+                    }
                 }
 
                 if(dataSnapshot.child("haveYouDrank").getValue() != null) {
-                    EditText t = view.findViewById(R.id.haveYouEverDrankEdit);
-                    t.setText((String) dataSnapshot.child("haveYouDrank").getValue());
+                    if(((String) dataSnapshot.child("haveYouDrank").getValue()).equals("Yes")) {
+                        haveYouDrankRadioGroup.check(R.id.haveYouEverDrankRadioYes);
+                    } else {
+                        haveYouDrankRadioGroup.check(R.id.haveYouEverDrankRadioNo);
+                    }
                 }
 
                 if(dataSnapshot.child("doYouSmoke").getValue() != null) {
-                    EditText t = view.findViewById(R.id.doYouSmokeEdit);
-                    t.setText((String) dataSnapshot.child("doYouSmoke").getValue());
+                    if(((String) dataSnapshot.child("doYouUseDrugs").getValue()).equals("Yes")) {
+                        doYouSmokeRadioGroup.check(R.id.doYouSmokeRadioYes);
+                    } else {
+                        doYouSmokeRadioGroup.check(R.id.doYouSmokeRadioNo);
+                    }
                 }
 
-                if(dataSnapshot.child("haveYouSmoked").getValue() != null) {
-                    EditText t = view.findViewById(R.id.haveYouEverSmokedEdit);
-                    t.setText((String) dataSnapshot.child("haveYouSmoked").getValue());
+
+                if(dataSnapshot.child("haveYouEverSmoked").getValue() != null) {
+                    if(((String) dataSnapshot.child("haveYouEverSmoked").getValue()).equals("Yes")) {
+                        haveYouEverSmokedRadioGroup.check(R.id.haveYouEverSmokedRadioYes);
+                    } else {
+                        haveYouEverSmokedRadioGroup.check(R.id.haveYouEverSmokedRadioNo);
+                    }
                 }
             }
 

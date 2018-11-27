@@ -37,9 +37,9 @@
 
         <TextView
             android:id="@+id/doYouSmokeLabel"
-            android:layout_width="match_parent"
+            android:layout_width="0px"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+            android:layout_weight="3"
             android:text="Do you smoke?\nEst-ce que tu fumes?"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
@@ -48,15 +48,28 @@
             tools:layout_editor_absoluteX="55dp"
             tools:layout_editor_absoluteY="107dp" />
 
-        <EditText
-            android:id="@+id/doYouSmokeEdit"
-            android:layout_width="match_parent"
+        <RadioGroup
+            android:id="@+id/doYouSmokeRadio"
+            android:layout_width="0px"
             android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:ems="10"
-            android:inputType="textPersonName"
-            tools:layout_editor_absoluteX="134dp"
-            tools:layout_editor_absoluteY="92dp" />
+            android:layout_weight="4"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/doYouSmokeRadioYes"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Yes"/>
+
+            <RadioButton
+                android:id="@+id/doYouSmokeRadioNo"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="No" />
+
+        </RadioGroup>
 
     </LinearLayout>
 
@@ -72,9 +85,9 @@
 
         <TextView
             android:id="@+id/haveYouEverSmokedLabel"
-            android:layout_width="match_parent"
+            android:layout_width="0px"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+            android:layout_weight="3"
             android:text="Have you ever smoked?\nAvez-vous déjà fumé?"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
@@ -83,15 +96,28 @@
             tools:layout_editor_absoluteX="55dp"
             tools:layout_editor_absoluteY="107dp" />
 
-        <EditText
-            android:id="@+id/haveYouEverSmokedEdit"
-            android:layout_width="match_parent"
+        <RadioGroup
+            android:id="@+id/haveYouEverSmokedRadio"
+            android:layout_width="0px"
             android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:ems="10"
-            android:inputType="textPersonName"
-            tools:layout_editor_absoluteX="134dp"
-            tools:layout_editor_absoluteY="92dp" />
+            android:layout_weight="4"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/haveYouEverSmokedRadioYes"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Yes"/>
+
+            <RadioButton
+                android:id="@+id/haveYouEverSmokedRadioNo"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="No" />
+
+        </RadioGroup>
 
     </LinearLayout>
 
@@ -107,9 +133,9 @@
 
         <TextView
             android:id="@+id/doYouDrinkLabel"
-            android:layout_width="match_parent"
+            android:layout_width="0px"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+            android:layout_weight="3"
             android:text="Do you drink alcohol?\nEst ce que tu bois de l'alcool?"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
@@ -118,15 +144,28 @@
             tools:layout_editor_absoluteX="55dp"
             tools:layout_editor_absoluteY="107dp" />
 
-        <EditText
-            android:id="@+id/doYouDrinkEdit"
-            android:layout_width="match_parent"
+        <RadioGroup
+            android:id="@+id/doYouDrinkRadio"
+            android:layout_width="0px"
             android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:ems="10"
-            android:inputType="textPersonName"
-            tools:layout_editor_absoluteX="134dp"
-            tools:layout_editor_absoluteY="92dp" />
+            android:layout_weight="4"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/doYouDrinkRadioYes"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Yes"/>
+
+            <RadioButton
+                android:id="@+id/doYouDrinkRadioNo"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="No" />
+
+        </RadioGroup>
 
     </LinearLayout>
 
@@ -142,9 +181,9 @@
 
         <TextView
             android:id="@+id/haveYouEverDrankLabel"
-            android:layout_width="match_parent"
+            android:layout_width="0px"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+            android:layout_weight="3"
             android:text="Have you ever drank alcohol?\nAvez-vous déjà bu de l'alcool?"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
@@ -153,15 +192,28 @@
             tools:layout_editor_absoluteX="55dp"
             tools:layout_editor_absoluteY="107dp" />
 
-        <EditText
-            android:id="@+id/haveYouEverDrankEdit"
-            android:layout_width="match_parent"
+        <RadioGroup
+            android:id="@+id/haveYouEverDrankRadio"
+            android:layout_width="0px"
             android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:ems="10"
-            android:inputType="textPersonName"
-            tools:layout_editor_absoluteX="134dp"
-            tools:layout_editor_absoluteY="92dp" />
+            android:layout_weight="4"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/haveYouEverDrankRadioYes"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Yes"/>
+
+            <RadioButton
+                android:id="@+id/haveYouEverDrankRadioNo"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="No" />
+
+        </RadioGroup>
 
     </LinearLayout>
 
@@ -177,9 +229,9 @@
 
         <TextView
             android:id="@+id/doYouUseDrugsLabel"
-            android:layout_width="match_parent"
+            android:layout_width="0px"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+            android:layout_weight="3"
             android:text="Do you use drugs?\nUtilisez-vous des drogues illégales?"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
@@ -188,15 +240,28 @@
             tools:layout_editor_absoluteX="55dp"
             tools:layout_editor_absoluteY="107dp" />
 
-        <EditText
-            android:id="@+id/doYouUseDrugsEdit"
-            android:layout_width="match_parent"
+        <RadioGroup
+            android:id="@+id/doYouUseDrugsRadio"
+            android:layout_width="0px"
             android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:ems="10"
-            android:inputType="textPersonName"
-            tools:layout_editor_absoluteX="134dp"
-            tools:layout_editor_absoluteY="92dp" />
+            android:layout_weight="4"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/doYouUseDrugsRadioYes"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Yes"/>
+
+            <RadioButton
+                android:id="@+id/doYouUseDrugsRadioNo"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="No" />
+
+        </RadioGroup>
 
     </LinearLayout>
 
@@ -212,9 +277,9 @@
 
         <TextView
             android:id="@+id/haveYouEverUsedLabel"
-            android:layout_width="match_parent"
+            android:layout_width="0px"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+            android:layout_weight="3"
             android:text="Have you ever used drugs?\nAvez-vous déjà consommé des drogues illégales?"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
@@ -223,15 +288,28 @@
             tools:layout_editor_absoluteX="55dp"
             tools:layout_editor_absoluteY="107dp" />
 
-        <EditText
-            android:id="@+id/haveYouEverUsedEdit"
-            android:layout_width="match_parent"
+        <RadioGroup
+            android:id="@+id/haveYouEverUsedRadio"
+            android:layout_width="0px"
             android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:ems="10"
-            android:inputType="textPersonName"
-            tools:layout_editor_absoluteX="134dp"
-            tools:layout_editor_absoluteY="92dp" />
+            android:layout_weight="4"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/haveYouEverUsedRadioYes"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="Yes"/>
+
+            <RadioButton
+                android:id="@+id/haveYouEverUsedRadioNo"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="No" />
+
+        </RadioGroup>
 
     </LinearLayout>
 

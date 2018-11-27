@@ -194,7 +194,9 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="none"
+            android:focusable="false"
+            android:clickable="true"
             tools:layout_editor_absoluteX="134dp"
             tools:layout_editor_absoluteY="92dp" />
 
