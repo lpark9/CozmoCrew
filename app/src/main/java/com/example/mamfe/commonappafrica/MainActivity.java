@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity
 
 
         MenuModel academicProfileModel = new MenuModel("Academic Profile", true, false);
-        MenuModel myAppModel = new MenuModel("My Application", true, true);
+        MenuModel myAppModel = new MenuModel("Application Profile", true, true);
         MenuModel myCollegesModel = new MenuModel("My Colleges", true, false);
         MenuModel settingsModel = new MenuModel("Settings", true, false);
         MenuModel searchModel = new MenuModel("Search", true, false);
@@ -201,6 +201,7 @@ public class MainActivity extends AppCompatActivity
         MenuModel generalInfoModel = new MenuModel("General Information", false, false);
         MenuModel personalHealthModel = new MenuModel("Personal Health", false, false);
         MenuModel workExperienceModel = new MenuModel("Work Experience", false, false);
+        MenuModel attachmentModel = new MenuModel("Attachment", false, false);
 
         myAppChildList.add(appDetailsModel);
         myAppChildList.add(eduBackgroundModel);
@@ -208,6 +209,7 @@ public class MainActivity extends AppCompatActivity
         myAppChildList.add(generalInfoModel);
         myAppChildList.add(personalHealthModel);
         myAppChildList.add(workExperienceModel);
+        myAppChildList.add(attachmentModel);
 
         childList.put(myAppModel, myAppChildList);
     }
@@ -333,6 +335,16 @@ public class MainActivity extends AppCompatActivity
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
                         transaction.replace(R.id.frame_container, workExperienceFragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+
+                        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                        drawer.closeDrawer(GravityCompat.START);
+                    } else if(model.menuName.equals("Attachment")) {
+                        Fragment attachmentFragment = new AcademicProfileAttachment();
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+                        transaction.replace(R.id.frame_container, attachmentFragment);
                         transaction.addToBackStack(null);
                         transaction.commit();
 
