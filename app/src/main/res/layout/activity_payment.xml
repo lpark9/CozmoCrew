@@ -27,6 +27,18 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="80dp"
+        android:alpha="0.5"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toRightOf="@+id/Payment"
+        app:layout_constraintBottom_toTopOf="@+id/CardNumber"
+        app:srcCompat="@drawable/weaccept"
+        tools:layout_editor_absoluteY="56dp" />
+
     <TextView
         android:id="@+id/Payment"
         android:layout_width="0dp"
