@@ -122,8 +122,6 @@ public class AcademicProfileAttachment extends Fragment {
 
             String imagePath = new String(data, "UTF-8");
 
-            ((ImageView) getView().findViewById(R.id.profileImage)).setImageURI(new Uri(imagePath));
-
             BitmapFactory.Options bmOptions = new BitmapFactory.Options();
             Bitmap bitmap = BitmapFactory.decodeFile(imagePath, bmOptions);
             ((ImageView) getView().findViewById(R.id.profileImage)).setImageBitmap(bitmap);
