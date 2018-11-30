@@ -1,7 +1,8 @@
 # COMMON APPLICATION FOR AFRICA
 Common Application for Africa has been designed and implemented to allow students to apply to an institutions online on a centralized system.
 
-Screenshots
+## Screenshots
+
 ![Screenshot1](Screenshots/login.png)
 ![Screenshot2](Screenshots/list.png)
 ![Screenshot3](Screenshots/application.png)
