@@ -1,6 +1,12 @@
 # COMMON APPLICATION FOR AFRICA
 Common Application for Africa has been designed and implemented to allow students to apply to an institutions online on a centralized system.
 
+Screenshots
+![Screenshot1](login.png)
+![Screenshot2](list.png)
+![Screenshot3](application.png)
+![Screenshot4](application2.png)
+
 ## Installing Common Application for Africa
 Following programs are used to run the application and implement. Click the links to download and install with corresponding operating system if you don't have them installed already.
 
@@ -25,7 +31,7 @@ Clone the public repository through Command Line
   2. If not, go to File -> Import Project
 4. Find the directory where you cloned source code above to import project
 
-Having access or permission issue while cloning? Email lpark9@gatech.edu
+Having access or permission issue while cloning? Email lpark9@gatech.edu, micah.j.terrell@gatech.edu, minkyung.jo@gatech.edu, danaeblee@gatech.edu, hkim7711@gatech.edu
 
 ## Running the application
 1. Once everything is installed and imported into Android Studio, click "Run" from Android Studio
