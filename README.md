@@ -2,10 +2,10 @@
 Common Application for Africa has been designed and implemented to allow students to apply to an institutions online on a centralized system.
 
 Screenshots
-![Screenshot1](login.png)
-![Screenshot2](list.png)
-![Screenshot3](application.png)
-![Screenshot4](application2.png)
+![Screenshot1](Screenshots/login.png)
+![Screenshot2](Screenshots/list.png)
+![Screenshot3](Screenshots/application.png)
+![Screenshot4](Screenshots/application2.png)
 
 ## Installing Common Application for Africa
 Following programs are used to run the application and implement. Click the links to download and install with corresponding operating system if you don't have them installed already.
