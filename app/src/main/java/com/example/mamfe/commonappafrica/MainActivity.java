@@ -3,6 +3,7 @@ package com.example.mamfe.commonappafrica;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.app.Fragment;
@@ -16,11 +17,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
+import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,11 +39,15 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    private DatabaseReference databaseReference;
     ExpandableListAdapter expandableListAdapter;
     ExpandableListView expandableListView;
     List<MenuModel> headerList = new ArrayList<>();
     HashMap<MenuModel, List<MenuModel>> childList = new HashMap<>();
+    public static String userName;
+    View headerView;
+
+
     //added
 
     @Override
@@ -44,6 +56,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -54,9 +69,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        View headerView = navigationView.getHeaderView(0);
-        TextView navUserName = headerView.findViewById(R.id.userName);
-        navUserName.setText(LoginActivity.getUserName());
+        headerView = navigationView.getHeaderView(0);
+        getName();
+
+        //System.out.println("1OUTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT" + getName());
         TextView navUserEmail = headerView.findViewById(R.id.userID);
         navUserEmail.setText(LoginActivity.getUserId());
         expandableListView = findViewById(R.id.expandableListView);
@@ -70,6 +86,38 @@ public class MainActivity extends AppCompatActivity
         transaction.replace(R.id.frame_container, searchFragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    public void getName(){
+        String a;
+        databaseReference.child("Users").orderByChild("email").equalTo(LoginActivity.userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                String name = "";
+                String key = "";
+
+                for (DataSnapshot child : children) {
+                    key = child.getKey();
+                    name = child.child("name").getValue().toString();
+                }
+                TextView navUserName = headerView.findViewById(R.id.userName);
+                navUserName.setText(name);
+//                System.out.println("Inside the loop key" + key);
+//                //userName = key;
+//                //userName = databaseReference.child("Users").child(key).child("name");
+//                System.out.println("KEYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY" + " " + key);
+//                System.out.println("inside the loop username" + userName);
+                userName = name;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        //System.out.println("INSIDE THE METHOD" + userName);
+        //return userName;
     }
 
     @Override
@@ -228,6 +276,7 @@ public class MainActivity extends AppCompatActivity
                     if (headerList.get(groupPosition).menuName.equals("Academic Profile")) {
                         ProfileFragment profileFragment = new ProfileFragment();
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
 
                         transaction.replace(R.id.frame_container, profileFragment);
                         transaction.addToBackStack(null);
