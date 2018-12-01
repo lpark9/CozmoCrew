@@ -125,13 +125,15 @@ public class AcademicProfileWorkExperience extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isApplying) {
-                    startActivity(new Intent(getActivity(), PaymentActivity.class));
-                } else {
-                    Toast feedback = Toast.makeText(view.getContext(), "You have completed your profile!", Toast.LENGTH_SHORT);
-                    feedback.show();
-                    startActivity(new Intent(getActivity(), MainActivity.class));
-                }
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("isApplying", isApplying);
+                Fragment workExperience = new AcademicProfileAttachment();
+                workExperience.setArguments(bundle);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_container, workExperience);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
             }
         });
 
