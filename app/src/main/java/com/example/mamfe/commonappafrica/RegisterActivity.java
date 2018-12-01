@@ -16,20 +16,23 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference = database.getInstance().getReference("user");
+    //private DatabaseReference databaseReference = database.getInstance().getReference("user");
     private FirebaseAuth mAuth;
+    //private FirebaseUser user;
 
     private EditText nameEdit;
     private EditText emailEdit;
     private EditText passwordEdit;
     private EditText confirmEdit;
     private EditText addressEdit;
+    public static int registerCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +66,13 @@ public class RegisterActivity extends AppCompatActivity {
                     toast.show();
                     return;
 
+                } else {
+                    registerCount += 1;
+                    DatabaseReference mRef = database.getReference().child("Users").child("" + registerCount);
+                    mRef.child("name").setValue(nameEdit.getText().toString());
+                    mRef.child("email").setValue(emailEdit.getText().toString());
+                    mRef.child("address").setValue(addressEdit.getText().toString());
+                    mRef.child("password").setValue(passwordEdit.getText().toString());
                 }
 
                 mAuth.createUserWithEmailAndPassword(emailEdit.getText().toString(), passwordEdit.getText().toString())
@@ -77,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.makeText(RegisterActivity.this, "Authentication failed." + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
-                                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                     finish();
                                 }
                             }

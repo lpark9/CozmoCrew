@@ -31,12 +31,10 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference databaseR;
     private String key;
+    public boolean loggedIn = false;
 
     //added
-    private static String userId, userName;
-
-
-
+    public static String userId, userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +80,25 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "User ID should be an email!", Toast.LENGTH_LONG).show();
                     return;
                 }
+//                databaseR.child("Users").addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+////                       Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+////                       userName = "isDatabase";
+////
+//////                       for (DataSnapshot child: children) {
+//////                           if (child.child("generalInfo").child("email").equals(userId)) {
+//////                               userName = child.child("generalInfo").child("firstName").getValue().toString();
+//////                               //userName += " " + child.child("generalInfo").child("lastName").getValue().toString();
+//////                           }
+//////                       }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                        }
+//                });
 
                 mAuth.signInWithEmailAndPassword(userValue, passValue)
                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<com.google.firebase.auth.AuthResult>() {
@@ -93,11 +110,11 @@ public class LoginActivity extends AppCompatActivity {
                                     } else {
                                         Toast.makeText(LoginActivity.this, "Invalid Credential", Toast.LENGTH_LONG).show();
                                     }
+                                    loggedIn = false;
                                 } else {
-
-                                    //added
+                                    loggedIn = true;
                                     userId = mAuth.getCurrentUser().getEmail();
-                                    
+
                                     //Need to know how the user Name is saved as
                                     //userName = mAuth.getCurrentUser().getDisplayName();
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -109,6 +126,32 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+//        if(loggedIn) {
+//            databaseR.child("UserProfiles").addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                    Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+//                    userName = "isDatabase";
+//
+//                    for (DataSnapshot child: children) {
+//                        if (child.child("generalInfo").child("email").equals(userId)) {
+//                            userName = child.child("generalInfo").child("firstName").getValue().toString();
+//                            //userName += " " + child.child("generalInfo").child("lastName").getValue().toString();
+//                        }
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                }
+//            });
+//            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
+
         //Button register = (Button) findViewById(R.id.register_button);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,7 +171,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public static String getUserName() {
+    public String getUserName() {
         if (userName != null) {
             return userName;
         } else {
