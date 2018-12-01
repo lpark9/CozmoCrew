@@ -66,16 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
                     return;
-
-                } else {
-                    registerCount += 1;
-                    DatabaseReference mRef = database.getReference().child("Users").child("" + registerCount);
-                    mRef.child("name").setValue(nameEdit.getText().toString());
-                    mRef.child("email").setValue(emailEdit.getText().toString());
-                    mRef.child("address").setValue(addressEdit.getText().toString());
-                    mRef.child("password").setValue(passwordEdit.getText().toString());
                 }
-
                 mAuth.createUserWithEmailAndPassword(emailEdit.getText().toString(), passwordEdit.getText().toString())
                         .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<com.google.firebase.auth.AuthResult>() {
                             @Override
@@ -90,6 +81,14 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.makeText(RegisterActivity.this, "Authentication failed." + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
+                                    System.out.println(registerCount + "                                             ");
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    registerCount += 1;
+                                    DatabaseReference mRef = database.getReference().child("Users").child("" + registerCount);
+                                    mRef.child("name").setValue(nameEdit.getText().toString());
+                                    mRef.child("email").setValue(emailEdit.getText().toString());
+                                    mRef.child("address").setValue(addressEdit.getText().toString());
+                                    mRef.child("password").setValue(passwordEdit.getText().toString());
                                     startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                     finish();
                                 }
