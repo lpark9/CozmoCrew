@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                                     userId = mAuth.getCurrentUser().getEmail();
 
                                     //Need to know how the user Name is saved as
-                                    //userName = mAuth.getCurrentUser().getDisplayName();
+                                    userName = mAuth.getCurrentUser().getDisplayName();
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intent);
                                     finish();

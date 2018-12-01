@@ -98,6 +98,17 @@ public class AcademicProfileApplicationDetails extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                if (isApplying) {
+//                    while (!checkNoEmpty()) {
+//
+//                    }
+//                }
+                // save and show feedback
+                updateFirebaseFields();
+                Toast feedback = Toast.makeText(view.getContext(), "Information Updated!", Toast.LENGTH_SHORT);
+                feedback.show();
+
+                // navigate to next page
                 Bundle bundle = new Bundle();
                 bundle.putBoolean("isApplying", isApplying);
                 Fragment education = new AcademicProfileEducationBackground();
@@ -111,6 +122,15 @@ public class AcademicProfileApplicationDetails extends Fragment {
 
         return view;
     }
+
+//    private boolean checkNoEmpty() {
+//        if (((EditText) getView().findViewById(R.id.degreeEdit)).getText().toString().length() == 0) {
+//            return false;
+//        } else if (((EditText) getView().findViewById(R.id.fieldOfStudyEdit)).getText().toString().length() == 0) {
+//            return false;
+//        }
+//        return true;
+//    }
 
     private void buildSpinners() {
         //Populate the spinner
