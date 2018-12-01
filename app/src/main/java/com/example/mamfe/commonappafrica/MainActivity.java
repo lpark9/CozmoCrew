@@ -72,8 +72,6 @@ public class MainActivity extends AppCompatActivity
         headerView = navigationView.getHeaderView(0);
 
 
-        System.out.println("1OUTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT" + getName());
-
         TextView navUserEmail = headerView.findViewById(R.id.userID);
         navUserEmail.setText(LoginActivity.getUserId());
         expandableListView = findViewById(R.id.expandableListView);

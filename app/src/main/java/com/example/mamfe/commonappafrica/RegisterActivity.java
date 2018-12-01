@@ -81,7 +81,6 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.makeText(RegisterActivity.this, "Authentication failed." + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
-                                    System.out.println(registerCount + "                                             ");
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     registerCount += 1;
                                     DatabaseReference mRef = database.getReference().child("Users").child("" + registerCount);
