@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,13 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -127,6 +135,7 @@ public class AcademicProfileAttachment extends Fragment {
             ((ImageView) getView().findViewById(R.id.profileImage)).setImageBitmap(bitmap);
 
         } catch(Exception e) {
+
             System.out.println("MMMMMMS");
             e.printStackTrace();
         }
@@ -193,14 +202,14 @@ public class AcademicProfileAttachment extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putBoolean("isApplying", isApplying);
-                android.app.Fragment generalInfo = new AcademicProfileGeneralInfo();
-                generalInfo.setArguments(bundle);
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_container, generalInfo);
-                transaction.addToBackStack(null);
-                transaction.commit();
+
+                if (isApplying) {
+                    startActivity(new Intent(getActivity(), PaymentActivity.class));
+                } else {
+                    Toast feedback = Toast.makeText(view.getContext(), "You have completed your profile!", Toast.LENGTH_SHORT);
+                    feedback.show();
+                    startActivity(new Intent(getActivity(), MainActivity.class));
+                }
             }
         });
 
@@ -209,12 +218,13 @@ public class AcademicProfileAttachment extends Fragment {
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putBoolean("isApplying", isApplying);
-                android.app.Fragment educationBackground = new AcademicProfileEducationBackground();
-                educationBackground.setArguments(bundle);
+                android.app.Fragment workExperience = new AcademicProfileWorkExperience();
+                workExperience.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_container, educationBackground);
+                transaction.replace(R.id.frame_container, workExperience);
                 transaction.addToBackStack(null);
                 transaction.commit();
+
             }
         });
 
