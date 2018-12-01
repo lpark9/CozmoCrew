@@ -70,8 +70,9 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         headerView = navigationView.getHeaderView(0);
+        getName();
 
-
+        //System.out.println("1OUTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT" + getName());
         TextView navUserEmail = headerView.findViewById(R.id.userID);
         navUserEmail.setText(LoginActivity.getUserId());
         expandableListView = findViewById(R.id.expandableListView);
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity
         transaction.commit();
     }
 
-    public String getName(){
+    public void getName(){
         String a;
         databaseReference.child("Users").orderByChild("email").equalTo(LoginActivity.userId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity
                     name = child.child("name").getValue().toString();
                 }
                 TextView navUserName = headerView.findViewById(R.id.userName);
-                navUserName.setText(getName());
+                navUserName.setText(name);
 //                System.out.println("Inside the loop key" + key);
 //                //userName = key;
 //                //userName = databaseReference.child("Users").child(key).child("name");
@@ -115,8 +116,8 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
-        System.out.println("INSIDE THE METHOD" + userName);
-        return userName;
+        //System.out.println("INSIDE THE METHOD" + userName);
+        //return userName;
     }
 
     @Override
