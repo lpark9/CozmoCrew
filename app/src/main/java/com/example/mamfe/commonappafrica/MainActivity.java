@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        MenuModel academicProfileModel = new MenuModel("Academic Profile", true, false);
+        MenuModel academicProfileModel = new MenuModel("Account", true, false);
         MenuModel myAppModel = new MenuModel("Application Profile", true, true);
         MenuModel myCollegesModel = new MenuModel("My Colleges", true, false);
         MenuModel settingsModel = new MenuModel("Settings", true, false);
