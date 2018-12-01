@@ -273,7 +273,7 @@ public class MainActivity extends AppCompatActivity
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
 
                 if (headerList.get(groupPosition).isGroup) {
-                    if (headerList.get(groupPosition).menuName.equals("Academic Profile")) {
+                    if (headerList.get(groupPosition).menuName.equals("Account")) {
                         ProfileFragment profileFragment = new ProfileFragment();
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
