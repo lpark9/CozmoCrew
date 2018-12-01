@@ -277,6 +277,7 @@ public class MainActivity extends AppCompatActivity
                         ProfileFragment profileFragment = new ProfileFragment();
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
+
                         transaction.replace(R.id.frame_container, profileFragment);
                         transaction.addToBackStack(null);
                         transaction.commit();

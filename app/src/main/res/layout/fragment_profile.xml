@@ -20,15 +20,15 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="106dp"
+        android:layout_width="240dp"
         android:layout_height="45dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="124dp"
-        android:gravity="center_vertical"
+        android:gravity="left"
         android:text="John Doe"
-        android:textAlignment="center"
+        android:textAlignment="gravity"
         android:textColor="@android:color/black"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -96,87 +96,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="16dp"
+            android:text="Personal Information:"
+            android:textAllCaps="true"
+            android:textColor="@android:color/background_dark"
             android:textSize="14sp"
-            android:text="Test Scores:"
-            android:textAllCaps="true"
-            android:textStyle="bold"
-            android:textColor="@android:color/background_dark"
-            />
+            android:textStyle="bold" />
+
         <TextView
+            android:id="@+id/emailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="8dp"
-            android:textSize="12sp"
-            android:text="SAT: 2360"
+            android:text="Email Address:"
             android:textAllCaps="true"
             android:textColor="@android:color/background_dark"
-            />
+            android:textSize="16sp" />
+
         <TextView
+            android:id="@+id/homeAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="8dp"
-            android:textSize="12sp"
-            android:text="SAT Math II: 800"
+            android:text="Home Address"
             android:textAllCaps="true"
             android:textColor="@android:color/background_dark"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="8dp"
-            android:textSize="12sp"
-            android:text="SAT Chemistry: 800"
-            android:textAllCaps="true"
-            android:textColor="@android:color/background_dark"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="8dp"
-            android:textSize="12sp"
-            android:text="SAT Biology: 800"
-            android:textAllCaps="true"
-            android:textColor="@android:color/background_dark"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="8dp"
-            android:textSize="12sp"
-            android:text="AP Computer Science: 5"
-            android:textAllCaps="true"
-            android:textColor="@android:color/background_dark"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="8dp"
-            android:textSize="12sp"
-            android:text="AP Economics: 5"
-            android:textAllCaps="true"
-            android:textColor="@android:color/background_dark"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="8dp"
-            android:textSize="12sp"
-            android:text="AP Chemistry: 5"
-            android:textAllCaps="true"
-            android:textColor="@android:color/background_dark"
-            />
+            android:textSize="16sp" />
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
