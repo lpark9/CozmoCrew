@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     public boolean loggedIn = false;
 
     //added
-    public static String userId, userName;
+    public static String userId, userName, userKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                                 } else {
                                     loggedIn = true;
                                     userId = mAuth.getCurrentUser().getEmail();
+                                    userKey = mAuth.getUid();
 
                                     //Need to know how the user Name is saved as
                                     userName = mAuth.getCurrentUser().getDisplayName();

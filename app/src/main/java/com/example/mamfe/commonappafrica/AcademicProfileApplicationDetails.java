@@ -52,6 +52,8 @@ public class AcademicProfileApplicationDetails extends Fragment {
     private OnFragmentInteractionListener mListener;
     private boolean isApplying;
 
+    private static boolean isFilled = true;
+
     public AcademicProfileApplicationDetails() {
         // Required empty public constructor
     }
@@ -65,6 +67,7 @@ public class AcademicProfileApplicationDetails extends Fragment {
         } else {
             isApplying = false;
         }
+
     }
 
     @Override
@@ -104,6 +107,23 @@ public class AcademicProfileApplicationDetails extends Fragment {
 //                    }
 //                }
                 // save and show feedback
+                boolean isFilledTest = filled();
+                System.out.println("0. isApplying --------------------------" + isApplying);
+                if(isApplying) {
+                    if (isFilledTest) {
+                        System.out.println("1.isFilled----------------------" + isFilledTest);
+                        System.out.println("2._______________________________________" + "truue");
+                    } else {
+                        System.out.println("3.isFilled----------------------" + isFilledTest);
+                        System.out.println("4.________________________________________" + "false");
+                    }
+                } else {
+                    System.out.println("Is Not Applying -------------------------------- ");
+                }
+
+//                if(filled()) {
+//                    System.out.println("______________________________________");
+//                }
                 updateFirebaseFields();
                 Toast feedback = Toast.makeText(view.getContext(), "Information Updated!", Toast.LENGTH_SHORT);
                 feedback.show();
@@ -263,5 +283,31 @@ public class AcademicProfileApplicationDetails extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public boolean filled() {
+        FirebaseDatabase.getInstance().getReference().child("UserProfiles").child(LoginActivity.userKey).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+
+                    for (DataSnapshot child : children) {
+                        if(!child.child("applicationDetails").child("degreeDesired").exists() ||
+                                !child.child("applicationDetails").child("fieldOfStudy").exists() ||
+                                !child.child("applicationDetails").child("semester").exists() ||
+                                !child.child("applicationDetails").child("year").exists()) {
+                            isFilled = false;
+                            System.out.println("5.______________________________________" + "false" + isFilled);
+                        }
+                    }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        System.out.println("oooooooooooooooooooooooooooooooooooooo" + isFilled);
+        return isFilled;
     }
 }

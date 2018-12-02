@@ -31,9 +31,6 @@ import butterknife.OnClick;
 public class ProfileFragment extends Fragment {
 
 
-    @BindView(R.id.gpaText)
-    EditText editText;
-
     TextView emailText;
     TextView addresstext;
     TextView nameText;
@@ -46,24 +43,23 @@ public class ProfileFragment extends Fragment {
         System.out.println("______________________________________");
         changeInfo(view);
         ButterKnife.bind(this, view);
-        editText.setText(Model.GPA);
         return view;
 
 
     }
-    @OnClick (R.id.editButton) void onClick(Button v) {
-
-
-        if (v.getText().toString().equals("Edit")) {
-            v.setText("Save");
-            editText.setEnabled(true);
-        } else {
-            v.setTag(0);
-            Model.GPA = editText.getText().toString();
-            v.setText("Edit");
-            editText.setEnabled(false);
-        }
-    }
+//    @OnClick (R.id.editButton) void onClick(Button v) {
+//
+//
+//        if (v.getText().toString().equals("Edit")) {
+//            v.setText("Save");
+//            editText.setEnabled(true);
+//        } else {
+//            v.setTag(0);
+//            Model.GPA = editText.getText().toString();
+//            v.setText("Edit");
+//            editText.setEnabled(false);
+//        }
+//    }
 
     public void changeInfo(View view) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();

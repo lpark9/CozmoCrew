@@ -26,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     //private DatabaseReference databaseReference = database.getInstance().getReference("user");
     private FirebaseAuth mAuth;
-    //private FirebaseUser user;
+    private FirebaseUser user;
 
     private EditText nameEdit;
     private EditText emailEdit;
@@ -82,8 +82,9 @@ public class RegisterActivity extends AppCompatActivity {
                                             Toast.LENGTH_SHORT).show();
                                 } else {
                                     FirebaseUser user = mAuth.getCurrentUser();
+                                    String uid = user.getUid();
                                     registerCount += 1;
-                                    DatabaseReference mRef = database.getReference().child("Users").child("" + registerCount);
+                                    DatabaseReference mRef = database.getReference().child("Users").child("" + uid);
                                     mRef.child("name").setValue(nameEdit.getText().toString());
                                     mRef.child("email").setValue(emailEdit.getText().toString());
                                     mRef.child("address").setValue(addressEdit.getText().toString());
