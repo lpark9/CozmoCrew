@@ -54,7 +54,7 @@ public class ApplyFragment extends Fragment {
         //TODO: Decide how to format the button
         if (Model.myColleges.contains(Model.selected)) {
             Button add = view.findViewById(R.id.add);
-            
+
             add.setBackgroundResource(R.drawable.remove_college_button);
             add.setTextColor(Color.BLACK);
             add.setText("Remove From My Colleges");

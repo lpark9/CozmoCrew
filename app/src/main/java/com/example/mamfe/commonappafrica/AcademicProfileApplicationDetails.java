@@ -123,15 +123,6 @@ public class AcademicProfileApplicationDetails extends Fragment {
         return view;
     }
 
-//    private boolean checkNoEmpty() {
-//        if (((EditText) getView().findViewById(R.id.degreeEdit)).getText().toString().length() == 0) {
-//            return false;
-//        } else if (((EditText) getView().findViewById(R.id.fieldOfStudyEdit)).getText().toString().length() == 0) {
-//            return false;
-//        }
-//        return true;
-//    }
-
     private void buildSpinners() {
         //Populate the spinner
         List<String> yearArray =  new ArrayList<String>();
@@ -173,9 +164,6 @@ public class AcademicProfileApplicationDetails extends Fragment {
         appDetails.child("degreeDesired").setValue(((EditText) getView().findViewById(R.id.degreeEdit)).getText().toString());
         appDetails.child("fieldOfStudy").setValue(((EditText) getView().findViewById(R.id.fieldOfStudyEdit)).getText().toString());
 
-//        appDetails.child("semester").setValue(((EditText) getView().findViewById(R.id.semesterEdit)).getText().toString());
-//        appDetails.child("year").setValue(((EditText) getView().findViewById(R.id.yearEdit)).getText().toString());
-
         Spinner yearSpinner = (Spinner) getView().findViewById(R.id.yearSpinner);
         String yearSpinnerValue = yearSpinner.getSelectedItem().toString();
 
@@ -187,7 +175,7 @@ public class AcademicProfileApplicationDetails extends Fragment {
     }
 
     private void populateFields(final View view) {
-        //TODO: Populate the fields
+
         String uid = this.user.getUid();
         database.child("UserProfiles").child(uid).child("applicationDetails").addValueEventListener(new ValueEventListener() {
             @Override
@@ -205,16 +193,11 @@ public class AcademicProfileApplicationDetails extends Fragment {
                 if(dataSnapshot.child("semester").getValue() != null) {
                     Spinner semesterSpinner = (Spinner) getView().findViewById(R.id.semesterSpinner);
                     semesterSpinner.setSelection(getIndex(semesterSpinner, (String) dataSnapshot.child("semester").getValue()));
-//                    EditText t = view.findViewById(R.id.semesterEdit);
-//                    t.setText((String) dataSnapshot.child("semester").getValue());
                 }
 
                 if(dataSnapshot.child("year").getValue() != null) {
                     Spinner yearSpinner = (Spinner) getView().findViewById(R.id.yearSpinner);
                     yearSpinner.setSelection(getIndex(yearSpinner, (String) dataSnapshot.child("year").getValue()));
-
-//                    EditText t = view.findViewById(R.id.yearEdit);
-//                    t.setText((String) dataSnapshot.child("year").getValue());
                 }
             }
 
@@ -225,10 +208,10 @@ public class AcademicProfileApplicationDetails extends Fragment {
         });
     }
 
-    //private method of your class
-    private int getIndex(Spinner spinner, String myString){
+    //https://stackoverflow.com/questions/2390102/how-to-set-selected-item-of-spinner-by-value-not-by-position/14640612#14640612
+    private int getIndex(Spinner spinner, String myString) {
         for (int i=0;i<spinner.getCount();i++){
-            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
                 return i;
             }
         }
