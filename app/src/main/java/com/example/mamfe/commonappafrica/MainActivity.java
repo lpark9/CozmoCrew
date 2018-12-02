@@ -231,7 +231,7 @@ public class MainActivity extends AppCompatActivity
         MenuModel academicProfileModel = new MenuModel("Account", true, false);
         MenuModel myAppModel = new MenuModel("Application Profile", true, true);
         MenuModel myCollegesModel = new MenuModel("My Colleges", true, false);
-        MenuModel settingsModel = new MenuModel("Settings", true, false);
+        MenuModel settingsModel = new MenuModel("About Us", true, false);
         MenuModel searchModel = new MenuModel("Search", true, false);
         MenuModel logoutModel = new MenuModel("Logout", true, false);
 

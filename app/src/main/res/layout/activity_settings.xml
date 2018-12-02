@@ -4,6 +4,7 @@
     android:layout_height="fill_parent" >
 
 
+
     <TextView
         android:id="@+id/editText"
         android:layout_width="fill_parent"
