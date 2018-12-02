@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -50,17 +51,40 @@ public class ApplyFragment extends Fragment {
         duedate = view.findViewById(R.id.deadline);
         duedate.setText(Model.deadlineSelected);
 
+        //TODO: Decide how to format the button
+        if (Model.myColleges.contains(Model.selected)) {
+            Button add = view.findViewById(R.id.add);
+            
+            add.setBackgroundResource(R.drawable.remove_college_button);
+            add.setTextColor(Color.BLACK);
+            add.setText("Remove From My Colleges");
+        }
+
         return view;
     }
     @OnClick (R.id.add) void onClick() {
+        //TODO: Change the click handler here
         CustomDialog dialog = new CustomDialog(getContext());
         if (Model.myColleges.contains(Model.selected)) {
             dialog.show();
-            dialog.setText(Model.selected + " is already in your 'My Colleges' list");
+            dialog.setText(Model.selected + " has been removed from your 'My Colleges' list");
+            Model.myColleges.remove(Model.selected);
+
+            Button add = getActivity().findViewById(R.id.add);
+            add.setBackgroundResource(R.drawable.login_button);
+            add.setTextColor(Color.WHITE);
+            add.setText("Add to My Colleges");
+
+            //Change the style back
         } else {
             dialog.show();
             dialog.setText(Model.selected + " had been added to your 'My Colleges' list");
             Model.myColleges.add(Model.selected);
+
+            Button add = getActivity().findViewById(R.id.add);
+            add.setBackgroundResource(R.drawable.remove_college_button);
+            add.setTextColor(Color.BLACK);
+            add.setText("Remove From My Colleges");
         }
 
         //Toast.makeText(getContext(), , Toast.LENGTH_SHORT).show();
