@@ -81,6 +81,13 @@ public class AcademicProfileAttachment extends Fragment {
 
         storageReference = FirebaseStorage.getInstance().getReference(user.getUid());
 
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            isApplying = bundle.getBoolean("isApplying");
+        } else {
+            isApplying = false;
+        }
+
 //        if (savedInstanceState != null) {
 //            mFileUri = savedInstanceState.getParcelable(KEY_FILE_URI);
 //            mDownloadUrl = savedInstanceState.getParcelable(KEY_DOWNLOAD_URL);

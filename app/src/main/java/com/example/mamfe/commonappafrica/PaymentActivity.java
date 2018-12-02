@@ -51,7 +51,8 @@ public class PaymentActivity extends AppCompatActivity{
                         CVV.length() == 3 &&
                         address.length() > 0) {
                     Toast.makeText(PaymentActivity.this, "Payment Confirmed!", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(PaymentActivity.this, MainActivity.class));
+                    System.out.println("P=====================================");
+                    startActivity(new Intent(PaymentActivity.this, confirmation.class));
                 } else {
                     Toast.makeText(PaymentActivity.this, "Incorrect payment info", Toast.LENGTH_LONG).show();
                     //startActivity(new Intent(PaymentActivity.this, PaymentActivity.class));
