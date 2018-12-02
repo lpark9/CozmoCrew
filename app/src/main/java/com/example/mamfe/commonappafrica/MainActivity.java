@@ -295,7 +295,7 @@ public class MainActivity extends AppCompatActivity
 
                         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                         drawer.closeDrawer(GravityCompat.START);
-                    } else if (headerList.get(groupPosition).menuName.equals("Settings")) {
+                    } else if (headerList.get(groupPosition).menuName.equals("About Us")) {
                         startActivity(new Intent(getApplicationContext(), settingsActivity.class));
 
                         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
