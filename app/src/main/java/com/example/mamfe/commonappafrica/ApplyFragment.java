@@ -84,7 +84,7 @@ public class ApplyFragment extends Fragment {
             Button add = getActivity().findViewById(R.id.add);
             add.setBackgroundResource(R.drawable.remove_college_button);
             add.setTextColor(Color.BLACK);
-            add.setText("Remove From My Colleges");
+            add.setText("Remove From My Colleges\nSupprimer du «My Colleges»");
         }
 
         //Toast.makeText(getContext(), , Toast.LENGTH_SHORT).show();
